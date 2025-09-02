@@ -1,5 +1,8 @@
 # Dresser - Smart Wardrobe Organizer
 
+> **Copyright © 2024 Deep Shahane. All rights reserved.**  
+> This software is licensed under the MIT License. See [LICENSE](LICENSE) for details.
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Next.js](https://img.shields.io/badge/Next.js-14.0.0-black)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0.0-blue)](https://www.typescriptlang.org/)
@@ -189,13 +192,13 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 - **Issues**: [GitHub Issues](https://github.com/Deep-De-coder/dresser/issues)
 - **Discussions**: [GitHub Discussions](https://github.com/Deep-De-coder/dresser/discussions)
-- **Email**: [Your Email]
+- **Email**: deep.shahane@example.com
 
 ---
 
 ## ⚖️ Copyright Notice
 
-**Copyright © 2024 [Your Name/Organization]. All rights reserved.**
+**Copyright © 2024 Deep Shahane. All rights reserved.**
 
 ### Intellectual Property Rights
 This software and its documentation are protected by copyright laws and international treaties. Unauthorized reproduction or distribution of this software, or any portion of it, may result in severe civil and criminal penalties, and will be prosecuted to the maximum extent possible under the law.
@@ -224,4 +227,6 @@ When using, modifying, or distributing this software, you must include:
 
 **Last Updated**: December 2024  
 **Version**: 1.0.0  
-**Status**: Active Development
+**Status**: Active Development  
+**Author**: Deep Shahane  
+**Copyright**: © 2024 Deep Shahane. All rights reserved.
