@@ -5,13 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useDropzone } from 'react-dropzone'
 import { Upload, Camera, Sparkles, CheckCircle, AlertCircle } from 'lucide-react'
 
-interface UploadedItem {
-  id: string
-  name: string
-  category: string
-  imageUrl: string
-  confidence: number
-}
+import { UploadedItem } from '../types'
 
 export default function PhotoUpload() {
   const [uploadedItems, setUploadedItems] = useState<UploadedItem[]>([])

@@ -3,10 +3,10 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Upload, Sparkles, Search, Grid, Plus, Camera } from 'lucide-react'
-import Header from '@/components/Header'
-import PhotoUpload from '@/components/PhotoUpload'
-import WardrobeGrid from '@/components/WardrobeGrid'
-import CategoryFilter from '@/components/CategoryFilter'
+import Header from '../components/Header'
+import PhotoUpload from '../components/PhotoUpload'
+import WardrobeGrid from '../components/WardrobeGrid'
+import CategoryFilter from '../components/CategoryFilter'
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<'upload' | 'wardrobe'>('upload')

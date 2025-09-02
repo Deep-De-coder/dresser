@@ -8,15 +8,9 @@ interface CategoryFilterProps {
   onCategoryChange: (category: string) => void
 }
 
-const categories = [
-  { id: 'all', name: 'All Items', color: 'bg-gray-100 text-gray-800' },
-  { id: 'shirt', name: 'Shirts', color: 'bg-blue-100 text-blue-800' },
-  { id: 'pants', name: 'Pants', color: 'bg-green-100 text-green-800' },
-  { id: 'jacket', name: 'Jackets', color: 'bg-purple-100 text-purple-800' },
-  { id: 'dress', name: 'Dresses', color: 'bg-pink-100 text-pink-800' },
-  { id: 'shoes', name: 'Shoes', color: 'bg-orange-100 text-orange-800' },
-  { id: 'accessory', name: 'Accessories', color: 'bg-yellow-100 text-yellow-800' },
-]
+import { CATEGORIES } from '../constants'
+
+const categories = CATEGORIES
 
 export default function CategoryFilter({ selectedCategory, onCategoryChange }: CategoryFilterProps) {
   return (

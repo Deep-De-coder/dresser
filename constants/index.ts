@@ -9,7 +9,7 @@ export const CATEGORIES = [
   { id: 'dress', name: 'Dresses', color: 'bg-pink-100 text-pink-800' },
   { id: 'shoes', name: 'Shoes', color: 'bg-orange-100 text-orange-800' },
   { id: 'accessory', name: 'Accessories', color: 'bg-yellow-100 text-yellow-800' },
-] as const
+]
 
 export const SEASONS = ['Spring', 'Summer', 'Fall', 'Winter'] as const
 

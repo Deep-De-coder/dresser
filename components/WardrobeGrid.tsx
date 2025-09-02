@@ -4,15 +4,7 @@ import { motion } from 'framer-motion'
 import { Heart, MoreVertical, Tag } from 'lucide-react'
 import { useState } from 'react'
 
-interface WardrobeItem {
-  id: string
-  name: string
-  category: string
-  imageUrl: string
-  color: string
-  season: string[]
-  favorite: boolean
-}
+import { WardrobeItem } from '../types'
 
 interface WardrobeGridProps {
   category: string
