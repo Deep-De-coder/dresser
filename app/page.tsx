@@ -7,10 +7,15 @@ import Header from '../components/Header'
 import PhotoUpload from '../components/PhotoUpload'
 import WardrobeGrid from '../components/WardrobeGrid'
 import CategoryFilter from '../components/CategoryFilter'
+import { AskDresser, TodaysFit, TripPacker, Insights } from '../components/agentic'
 
 export default function Home() {
-  const [activeTab, setActiveTab] = useState<'upload' | 'wardrobe'>('upload')
+  const [activeTab, setActiveTab] = useState<'upload' | 'wardrobe' | 'ai'>('upload')
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
+  const [aiTab, setAiTab] = useState<'ask' | 'today' | 'trip' | 'insights'>('ask')
+  
+  // Mock userId - in real app, this would come from authentication
+  const userId = 'user_123'
 
   return (
     <div className="min-h-screen">
@@ -96,19 +101,82 @@ export default function Home() {
               <Grid className="w-5 h-5 inline mr-2" />
               My Wardrobe
             </button>
+            <button
+              onClick={() => setActiveTab('ai')}
+              className={`flex-1 px-6 py-4 text-center font-medium transition-colors ${
+                activeTab === 'ai'
+                  ? 'text-blue-600 border-b-2 border-blue-600 bg-blue-50'
+                  : 'text-gray-500 hover:text-gray-700'
+              }`}
+            >
+              <Sparkles className="w-5 h-5 inline mr-2" />
+              AI Assistant
+            </button>
           </div>
 
           {/* Tab Content */}
           <div className="p-6">
             {activeTab === 'upload' ? (
               <PhotoUpload />
-            ) : (
+            ) : activeTab === 'wardrobe' ? (
               <div>
                 <CategoryFilter 
                   selectedCategory={selectedCategory}
                   onCategoryChange={setSelectedCategory}
                 />
                 <WardrobeGrid category={selectedCategory} />
+              </div>
+            ) : (
+              <div className="space-y-6">
+                {/* AI Sub-tabs */}
+                <div className="flex border-b border-gray-200">
+                  <button
+                    onClick={() => setAiTab('ask')}
+                    className={`px-4 py-2 text-sm font-medium transition-colors ${
+                      aiTab === 'ask'
+                        ? 'text-blue-600 border-b-2 border-blue-600'
+                        : 'text-gray-500 hover:text-gray-700'
+                    }`}
+                  >
+                    Ask Dresser
+                  </button>
+                  <button
+                    onClick={() => setAiTab('today')}
+                    className={`px-4 py-2 text-sm font-medium transition-colors ${
+                      aiTab === 'today'
+                        ? 'text-blue-600 border-b-2 border-blue-600'
+                        : 'text-gray-500 hover:text-gray-700'
+                    }`}
+                  >
+                    Today's Fit
+                  </button>
+                  <button
+                    onClick={() => setAiTab('trip')}
+                    className={`px-4 py-2 text-sm font-medium transition-colors ${
+                      aiTab === 'trip'
+                        ? 'text-blue-600 border-b-2 border-blue-600'
+                        : 'text-gray-500 hover:text-gray-700'
+                    }`}
+                  >
+                    Trip Packer
+                  </button>
+                  <button
+                    onClick={() => setAiTab('insights')}
+                    className={`px-4 py-2 text-sm font-medium transition-colors ${
+                      aiTab === 'insights'
+                        ? 'text-blue-600 border-b-2 border-blue-600'
+                        : 'text-gray-500 hover:text-gray-700'
+                    }`}
+                  >
+                    Insights
+                  </button>
+                </div>
+
+                {/* AI Content */}
+                {aiTab === 'ask' && <AskDresser userId={userId} />}
+                {aiTab === 'today' && <TodaysFit userId={userId} />}
+                {aiTab === 'trip' && <TripPacker userId={userId} />}
+                {aiTab === 'insights' && <Insights userId={userId} />}
               </div>
             )}
           </div>

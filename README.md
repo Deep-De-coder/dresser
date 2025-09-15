@@ -1,4 +1,4 @@
-# Dresser - Smart Wardrobe Organizer
+# Dresser - Smart Wardrobe Organizer with Agentic AI
 
 > **Copyright © 2024 Deep Shahane. All rights reserved.**  
 > This software is licensed under the MIT License. See [LICENSE](LICENSE) for details.
@@ -7,15 +7,30 @@
 [![Next.js](https://img.shields.io/badge/Next.js-14.0.0-black)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0.0-blue)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.3.0-38B2AC)](https://tailwindcss.com/)
+[![AI Agents](https://img.shields.io/badge/AI-Agents-purple)](https://github.com/features/ai)
 
-A smart wardrobe organizer that helps users keep track of their clothing with just a photo. Using AI, it instantly identifies and categorizes each item, like shirts, pants, or jackets, making it easy to manage, search, and visualize your entire wardrobe.
+A smart wardrobe organizer powered by autonomous AI agents that helps users manage their clothing with intelligent recommendations, outfit planning, and personalized style insights. Using advanced AI perception, planning, and learning systems, Dresser transforms your closet into an intelligent digital wardrobe.
 
 ## ✨ Features
 
+### 🤖 Agentic AI System
+- **🧠 Autonomous Agents**: Stylist, Perception, and Inventory agents with plan→act→reflect loops
+- **🎯 Smart Recommendations**: AI-powered outfit suggestions based on weather, occasion, and preferences
+- **📊 Learning System**: Feedback-driven learning that improves recommendations over time
+- **🔍 Advanced Perception**: On-device and server-side image analysis with duplicate detection
+- **📈 Wardrobe Insights**: Analytics on wear patterns, color preferences, and style gaps
+
+### 🎨 User Experience
+- **💬 Ask Dresser**: Natural language interface for outfit requests
+- **⚡ Today's Fit**: One-tap outfit suggestions with weather integration
+- **🧳 Trip Packer**: Intelligent packing lists for travel with laundry scheduling
+- **📊 Style Analytics**: Comprehensive insights into your wardrobe usage
+- **🔒 Privacy-First**: Local-first image processing with granular privacy controls
+
+### 🛠️ Technical Features
 - **🤖 AI-Powered Recognition**: Instantly identifies and categorizes clothing items from photos
 - **📂 Smart Categorization**: Automatically sorts items into shirts, pants, jackets, and more
 - **🗂️ Digital Inventory**: Transform your closet into a searchable digital wardrobe
-- **👗 Outfit Planning**: Easily plan and organize outfits from your digital collection
 - **🔄 Duplicate Prevention**: Avoid purchasing items you already own
 - **🌐 Anytime Access**: Access your wardrobe inventory from anywhere
 - **📱 Responsive Design**: Works perfectly on desktop, tablet, and mobile devices
@@ -45,6 +60,10 @@ This project is currently in development for a hackathon. The goal is to bring t
 - ✅ **Error Handling**: Comprehensive error boundaries and loading states
 - ✅ **SEO Optimization**: Meta tags, sitemap, and social sharing
 - ✅ **PWA Ready**: Web app manifest and service worker support
+- ✅ **Agentic AI System**: Complete autonomous agent architecture
+- ✅ **Learning System**: Feedback-driven improvement with privacy controls
+- ✅ **API Routes**: RESTful endpoints for all agentic features
+- ✅ **Privacy Guardrails**: Comprehensive data protection and user control
 
 ### 🔮 Future Enhancements:
 - 🚧 **Real AI Integration**: Connect to actual AI clothing recognition APIs
@@ -103,6 +122,59 @@ This project is currently in development for a hackathon. The goal is to bring t
 - **♿ Accessibility**: Keyboard navigation and screen reader support
 - **🌙 Dark Mode Ready**: Prepared for theme switching functionality
 
+## 🧠 Agentic AI Architecture
+
+Dresser implements a sophisticated multi-agent system with autonomous planning, execution, and learning capabilities:
+
+### 🤖 Agent Types
+
+#### **Stylist Agent**
+- **Purpose**: Generates outfit recommendations based on user goals and constraints
+- **Capabilities**: 
+  - Plans outfit combinations using weather, occasion, and preferences
+  - Executes wardrobe searches and scoring algorithms
+  - Self-critiques and refines suggestions
+  - Provides 2-3 outfit options with detailed rationales
+
+#### **Perception Agent**
+- **Purpose**: Analyzes uploaded clothing images and extracts attributes
+- **Capabilities**:
+  - On-device and server-side image analysis
+  - Color, pattern, fabric, and formality detection
+  - Duplicate detection using perceptual hashing
+  - Embedding generation for semantic search
+
+#### **Inventory Agent**
+- **Purpose**: Manages wardrobe analytics and optimization
+- **Capabilities**:
+  - Tracks wear frequency and usage patterns
+  - Identifies wardrobe gaps and suggests improvements
+  - Analyzes color preferences and style trends
+  - Provides data-driven wardrobe optimization
+
+### 🔄 Plan→Act→Reflect Loop
+
+Each agent follows a structured decision-making process:
+
+1. **Plan**: Analyze goals, constraints, and available tools
+2. **Act**: Execute planned actions using specialized tools
+3. **Reflect**: Self-critique results and learn from outcomes
+4. **Iterate**: Refine approach based on feedback and learning
+
+### 🛠️ Tool Ecosystem
+
+- **Weather Tool**: Real-time weather data for outfit planning
+- **Wardrobe Tool**: Search, filter, and manage clothing items
+- **Scoring Tool**: Evaluate outfit combinations with multi-factor analysis
+- **Laundry Tool**: Track item cleanliness and wear status
+
+### 📊 Learning System
+
+- **Feedback Processing**: Extracts insights from user accept/reject decisions
+- **Preference Learning**: Builds user style profiles over time
+- **Rule Generation**: Creates adaptive rules for future recommendations
+- **Performance Metrics**: Tracks accuracy and user satisfaction
+
 ## 🛠️ Tech Stack
 
 ### **Frontend Framework**
@@ -136,25 +208,103 @@ This project is currently in development for a hackathon. The goal is to bring t
 ```
 dresser/
 ├── app/                    # Next.js 14 App Router
+│   ├── api/               # API routes
+│   │   ├── stylist/       # Stylist agent endpoints
+│   │   ├── items/         # Item management endpoints
+│   │   ├── feedback/      # Learning system endpoints
+│   │   └── gaps/          # Wardrobe analysis endpoints
 │   ├── components/         # Reusable UI components
 │   ├── globals.css        # Global styles and Tailwind
 │   ├── layout.tsx         # Root layout component
-│   ├── page.tsx           # Home page
+│   ├── page.tsx           # Home page with AI features
 │   ├── loading.tsx        # Loading state component
 │   ├── error.tsx          # Error boundary
 │   ├── not-found.tsx      # 404 page
 │   └── [meta files]       # SEO and PWA configuration
 ├── components/             # React components
+│   ├── agentic/           # AI agent UI components
+│   │   ├── AskDresser.tsx # Natural language interface
+│   │   ├── TodaysFit.tsx  # Quick outfit suggestions
+│   │   ├── TripPacker.tsx # Travel planning
+│   │   └── Insights.tsx   # Wardrobe analytics
 │   ├── ui/                # Base UI components
 │   ├── Header.tsx         # Navigation header
 │   ├── PhotoUpload.tsx    # File upload component
 │   ├── WardrobeGrid.tsx   # Wardrobe display grid
 │   └── CategoryFilter.tsx # Category filtering
-├── lib/                    # Utility functions
+├── lib/                    # Core system libraries
+│   ├── agents/            # AI agent implementations
+│   │   ├── base-agent.ts  # Base agent class
+│   │   ├── stylist-agent.ts # Outfit recommendation agent
+│   │   ├── perception-agent.ts # Image analysis agent
+│   │   └── inventory-agent.ts # Wardrobe analytics agent
+│   ├── tools/             # Agent tool implementations
+│   │   ├── weather.ts     # Weather data tool
+│   │   ├── wardrobe.ts    # Wardrobe management tool
+│   │   └── scoring.ts     # Outfit scoring tool
+│   ├── db/                # Database layer
+│   │   ├── types.ts       # Database types
+│   │   ├── interface.ts   # Database interface
+│   │   └── local-fallback.ts # Local storage fallback
+│   ├── perception/        # Image analysis system
+│   │   ├── embedding.ts   # Embedding generation
+│   │   └── client-side.ts # Client-side processing
+│   ├── learning/          # Learning system
+│   │   └── feedback-processor.ts # Feedback processing
+│   ├── privacy/           # Privacy controls
+│   │   └── guardrails.ts  # Privacy guardrails
+│   ├── config/            # Configuration management
+│   ├── rate-limiting.ts   # API rate limiting
+│   └── utils.ts           # Utility functions
 ├── types/                  # TypeScript type definitions
 ├── constants/              # Application constants
 └── [config files]          # Build and development config
 ```
+
+## 🧪 Testing the Agentic System
+
+### Manual Test Plan
+
+1. **Upload Items Test**
+   - Upload 3 clothing items
+   - Verify AI analysis appears with attributes
+   - Check for duplicate detection warnings
+
+2. **Ask Dresser Test**
+   - Request "smart casual rainy day in NYC tomorrow"
+   - Verify 2-3 outfit suggestions with rationales
+   - Accept one suggestion and mark as worn
+
+3. **Learning Test**
+   - Reject an outfit with reason "too formal"
+   - Request another outfit
+   - Verify future suggestions reduce formality
+
+4. **Privacy Test**
+   - Toggle "Local-first images" setting
+   - Upload an item
+   - Verify server receives only tags/embeddings
+
+5. **Trip Packer Test**
+   - Create a 3-day trip to Paris
+   - Add activities: business meetings, sightseeing
+   - Verify packing list respects laundry cycles
+
+### Environment Configuration
+
+The system gracefully degrades when external services are unavailable:
+
+- **No Database**: Uses in-memory local fallback
+- **No Weather API**: Uses seasonal weather simulation
+- **No AI Services**: Uses mock analysis and recommendations
+- **No API Keys**: All features work with simulated data
+
+### Privacy Controls
+
+- **Local-First Images**: Keep raw photos client-side, upload only derived data
+- **Data Retention**: Configurable retention periods (default: 365 days)
+- **Analytics Opt-out**: Disable usage analytics and data sharing
+- **Data Export/Delete**: Full user data control and GDPR compliance
 
 ## 🤝 Contributing
 
