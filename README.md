@@ -306,6 +306,60 @@ The system gracefully degrades when external services are unavailable:
 - **Analytics Opt-out**: Disable usage analytics and data sharing
 - **Data Export/Delete**: Full user data control and GDPR compliance
 
+## 🚀 System Capabilities
+
+### 🎯 **Intelligent Recommendations**
+- **Context-Aware**: Considers weather, occasion, and personal style
+- **Multi-Factor Scoring**: Evaluates formality, color harmony, seasonality, and wear frequency
+- **Adaptive Learning**: Improves suggestions based on user feedback
+- **Rationale Generation**: Provides clear explanations for each recommendation
+
+### 🧠 **Advanced AI Features**
+- **Semantic Search**: Find items by description, not just categories
+- **Duplicate Detection**: Prevents purchasing items you already own
+- **Wear Pattern Analysis**: Tracks usage to optimize wardrobe rotation
+- **Gap Identification**: Suggests missing pieces for complete outfits
+
+### 🔒 **Privacy & Security**
+- **Zero-Knowledge Architecture**: Your data stays private by default
+- **Granular Controls**: Choose what data to share and for how long
+- **Local Processing**: Image analysis happens on your device
+- **Encrypted Storage**: All sensitive data is properly protected
+
+### 📊 **Analytics & Insights**
+- **Wardrobe Health**: Monitor item usage and identify underutilized pieces
+- **Style Evolution**: Track how your preferences change over time
+- **Cost Analysis**: Understand the value and ROI of your clothing investments
+- **Seasonal Trends**: Adapt recommendations based on weather patterns
+
+## 🎬 Quick Demo
+
+### Example Interactions
+
+**Ask Dresser:**
+```
+User: "What should I wear for a business meeting tomorrow in NYC?"
+Dresser: "I recommend a navy blazer with a white shirt and charcoal pants. 
+The weather will be 18°C with light rain, so I've included a waterproof 
+jacket. This combination scores 92% for business formality and weather 
+appropriateness."
+```
+
+**Today's Fit:**
+```
+Dresser: "Based on today's 22°C sunny weather, I suggest your blue 
+cotton shirt with khaki chinos. You haven't worn this combination 
+in 2 weeks, and it's perfect for casual Friday at the office."
+```
+
+**Trip Packer:**
+```
+User: "3-day trip to Paris, business meetings + sightseeing"
+Dresser: "I've created a packing list with 2 business outfits, 1 
+casual outfit, and essentials. The navy blazer can be worn for 
+both business and dinner. Laundry scheduled for Day 2 evening."
+```
+
 ## 🤝 Contributing
 
 We welcome contributions! Please feel free to submit a Pull Request.
