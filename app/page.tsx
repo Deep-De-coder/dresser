@@ -26,14 +26,14 @@ export default function Home() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center mb-16"
         >
-          <h1 className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-4">
+          <h1 className="text-6xl font-light tracking-tight bg-gradient-to-r from-slate-800 via-slate-700 to-slate-600 bg-clip-text text-transparent mb-6">
             Your Smart Wardrobe
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Transform your closet into a digital inventory with AI-powered clothing recognition. 
-            Upload photos and let our AI instantly categorize your wardrobe.
+          <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed font-light">
+            Transform your closet into a sophisticated digital inventory with AI-powered clothing recognition. 
+            Upload photos and let our intelligent system instantly categorize and organize your wardrobe.
           </p>
         </motion.div>
 
@@ -42,11 +42,11 @@ export default function Home() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden mb-8"
+          className="bg-white rounded-3xl shadow-2xl border border-slate-100 overflow-hidden mb-12"
         >
-          <div className="p-6">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center">
-              <Upload className="w-6 h-6 mr-3 text-blue-600" />
+          <div className="p-8">
+            <h2 className="text-3xl font-light text-slate-800 mb-6 flex items-center">
+              <Upload className="w-7 h-7 mr-4 text-slate-600" />
               Add New Items
             </h2>
             <PhotoUpload />
@@ -58,30 +58,30 @@ export default function Home() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="grid md:grid-cols-3 gap-6 mb-8"
+          className="grid md:grid-cols-3 gap-8 mb-12"
         >
-          <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
-            <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-              <Camera className="w-6 h-6 text-blue-600" />
+          <div className="bg-white rounded-2xl p-8 shadow-xl border border-slate-100 hover:shadow-2xl transition-all duration-300">
+            <div className="w-16 h-16 bg-gradient-to-br from-slate-100 to-slate-200 rounded-2xl flex items-center justify-center mb-6">
+              <Camera className="w-8 h-8 text-slate-700" />
             </div>
-            <h3 className="text-lg font-semibold mb-2">AI Recognition</h3>
-            <p className="text-gray-600">Instantly identify and categorize clothing items from photos</p>
+            <h3 className="text-xl font-light text-slate-800 mb-3">AI Recognition</h3>
+            <p className="text-slate-600 leading-relaxed">Instantly identify and categorize clothing items from photos with advanced computer vision technology</p>
           </div>
           
-          <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
-            <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
-              <Grid className="w-6 h-6 text-purple-600" />
+          <div className="bg-white rounded-2xl p-8 shadow-xl border border-slate-100 hover:shadow-2xl transition-all duration-300">
+            <div className="w-16 h-16 bg-gradient-to-br from-slate-100 to-slate-200 rounded-2xl flex items-center justify-center mb-6">
+              <Grid className="w-8 h-8 text-slate-700" />
             </div>
-            <h3 className="text-lg font-semibold mb-2">Smart Organization</h3>
-            <p className="text-gray-600">Automatically sort items into categories and collections</p>
+            <h3 className="text-xl font-light text-slate-800 mb-3">Smart Organization</h3>
+            <p className="text-slate-600 leading-relaxed">Automatically sort items into categories and collections with intelligent classification algorithms</p>
           </div>
           
-          <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
-            <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
-              <Search className="w-6 h-6 text-green-600" />
+          <div className="bg-white rounded-2xl p-8 shadow-xl border border-slate-100 hover:shadow-2xl transition-all duration-300">
+            <div className="w-16 h-16 bg-gradient-to-br from-slate-100 to-slate-200 rounded-2xl flex items-center justify-center mb-6">
+              <Search className="w-8 h-8 text-slate-700" />
             </div>
-            <h3 className="text-lg font-semibold mb-2">Easy Search</h3>
-            <p className="text-gray-600">Find exactly what you're looking for in your digital wardrobe</p>
+            <h3 className="text-xl font-light text-slate-800 mb-3">Intelligent Search</h3>
+            <p className="text-slate-600 leading-relaxed">Find exactly what you're looking for in your digital wardrobe with semantic search capabilities</p>
           </div>
         </motion.div>
 
@@ -91,52 +91,52 @@ export default function Home() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden mb-8"
+          className="bg-white rounded-3xl shadow-2xl border border-slate-100 overflow-hidden mb-12"
         >
-          <div className="p-6">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center">
-              <Sparkles className="w-6 h-6 mr-3 text-purple-600" />
+          <div className="p-8">
+            <h2 className="text-3xl font-light text-slate-800 mb-6 flex items-center">
+              <Sparkles className="w-7 h-7 mr-4 text-slate-600" />
               AI Assistant
             </h2>
             <div className="space-y-6">
               {/* AI Sub-tabs */}
-              <div className="flex border-b border-gray-200">
+              <div className="flex border-b border-slate-200">
                 <button
                   onClick={() => setAiTab('ask')}
-                  className={`px-4 py-2 text-sm font-medium transition-colors ${
+                  className={`px-6 py-3 text-sm font-light transition-all duration-200 ${
                     aiTab === 'ask'
-                      ? 'text-blue-600 border-b-2 border-blue-600'
-                      : 'text-gray-500 hover:text-gray-700'
+                      ? 'text-slate-800 border-b-2 border-slate-600'
+                      : 'text-slate-500 hover:text-slate-700 hover:border-b-2 hover:border-slate-300'
                   }`}
                 >
                   Ask Dresser
                 </button>
                 <button
                   onClick={() => setAiTab('today')}
-                  className={`px-4 py-2 text-sm font-medium transition-colors ${
+                  className={`px-6 py-3 text-sm font-light transition-all duration-200 ${
                     aiTab === 'today'
-                      ? 'text-blue-600 border-b-2 border-blue-600'
-                      : 'text-gray-500 hover:text-gray-700'
+                      ? 'text-slate-800 border-b-2 border-slate-600'
+                      : 'text-slate-500 hover:text-slate-700 hover:border-b-2 hover:border-slate-300'
                   }`}
                 >
                   Today's Fit
                 </button>
                 <button
                   onClick={() => setAiTab('trip')}
-                  className={`px-4 py-2 text-sm font-medium transition-colors ${
+                  className={`px-6 py-3 text-sm font-light transition-all duration-200 ${
                     aiTab === 'trip'
-                      ? 'text-blue-600 border-b-2 border-blue-600'
-                      : 'text-gray-500 hover:text-gray-700'
+                      ? 'text-slate-800 border-b-2 border-slate-600'
+                      : 'text-slate-500 hover:text-slate-700 hover:border-b-2 hover:border-slate-300'
                   }`}
                 >
                   Trip Packer
                 </button>
                 <button
                   onClick={() => setAiTab('insights')}
-                  className={`px-4 py-2 text-sm font-medium transition-colors ${
+                  className={`px-6 py-3 text-sm font-light transition-all duration-200 ${
                     aiTab === 'insights'
-                      ? 'text-blue-600 border-b-2 border-blue-600'
-                      : 'text-gray-500 hover:text-gray-700'
+                      ? 'text-slate-800 border-b-2 border-slate-600'
+                      : 'text-slate-500 hover:text-slate-700 hover:border-b-2 hover:border-slate-300'
                   }`}
                 >
                   Insights
@@ -158,11 +158,11 @@ export default function Home() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
-          className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden"
+          className="bg-white rounded-3xl shadow-2xl border border-slate-100 overflow-hidden"
         >
-          <div className="p-6">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center">
-              <Grid className="w-6 h-6 mr-3 text-green-600" />
+          <div className="p-8">
+            <h2 className="text-3xl font-light text-slate-800 mb-6 flex items-center">
+              <Grid className="w-7 h-7 mr-4 text-slate-600" />
               My Wardrobe
             </h2>
             <CategoryFilter 

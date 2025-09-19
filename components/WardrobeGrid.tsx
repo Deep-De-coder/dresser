@@ -90,26 +90,26 @@ export default function WardrobeGrid({ category }: WardrobeGridProps) {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="text-center py-12"
+        className="text-center py-16"
       >
-        <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          <Tag className="w-12 h-12 text-gray-400" />
+        <div className="w-24 h-24 bg-slate-100 rounded-2xl flex items-center justify-center mx-auto mb-6">
+          <Tag className="w-12 h-12 text-slate-400" />
         </div>
-        <h3 className="text-lg font-medium text-gray-900 mb-2">No items found</h3>
-        <p className="text-gray-600">Try uploading some clothing photos to get started!</p>
+        <h3 className="text-xl font-light text-slate-800 mb-3">No items found</h3>
+        <p className="text-slate-600 font-light">Try uploading some clothing photos to get started!</p>
       </motion.div>
     )
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
       {filteredItems.map((item, index) => (
         <motion.div
           key={item.id}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: index * 0.1 }}
-          className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow duration-300"
+          className="bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden hover:shadow-2xl transition-all duration-300"
         >
           {/* Image */}
           <div className="relative aspect-square overflow-hidden">
@@ -122,47 +122,47 @@ export default function WardrobeGrid({ category }: WardrobeGridProps) {
             {/* Favorite Button */}
             <button
               onClick={() => toggleFavorite(item.id)}
-              className={`absolute top-3 right-3 p-2 rounded-full transition-all duration-200 ${
+              className={`absolute top-4 right-4 p-3 rounded-xl transition-all duration-200 ${
                 favorites.has(item.id)
-                  ? 'bg-red-500 text-white shadow-lg'
-                  : 'bg-white/80 text-gray-600 hover:bg-white'
+                  ? 'bg-slate-700 text-white shadow-lg'
+                  : 'bg-white/90 text-slate-600 hover:bg-white'
               }`}
             >
-              <Heart className={`w-4 h-4 ${favorites.has(item.id) ? 'fill-current' : ''}`} />
+              <Heart className={`w-5 h-5 ${favorites.has(item.id) ? 'fill-current' : ''}`} />
             </button>
 
             {/* More Options */}
-            <button className="absolute top-3 left-3 p-2 rounded-full bg-white/80 text-gray-600 hover:bg-white transition-colors">
-              <MoreVertical className="w-4 h-4" />
+            <button className="absolute top-4 left-4 p-3 rounded-xl bg-white/90 text-slate-600 hover:bg-white transition-all duration-200">
+              <MoreVertical className="w-5 h-5" />
             </button>
 
             {/* Category Badge */}
-            <div className="absolute bottom-3 left-3">
-              <span className="px-2 py-1 bg-black/70 text-white text-xs font-medium rounded-full">
+            <div className="absolute bottom-4 left-4">
+              <span className="px-3 py-1 bg-slate-800/80 text-white text-sm font-light rounded-xl">
                 {item.category.charAt(0).toUpperCase() + item.category.slice(1)}
               </span>
             </div>
           </div>
 
           {/* Item Info */}
-          <div className="p-4">
-            <h3 className="font-semibold text-gray-900 mb-2 line-clamp-1">
+          <div className="p-6">
+            <h3 className="font-light text-slate-800 text-lg mb-3 line-clamp-1">
               {item.name}
             </h3>
             
-            <div className="space-y-2">
+            <div className="space-y-3">
               <div className="flex items-center justify-between text-sm">
-                <span className="text-gray-600">Color:</span>
-                <span className="font-medium text-gray-900">{item.color}</span>
+                <span className="text-slate-600 font-light">Color:</span>
+                <span className="font-light text-slate-800">{item.color}</span>
               </div>
               
               <div className="flex items-center justify-between text-sm">
-                <span className="text-gray-600">Season:</span>
-                <div className="flex flex-wrap gap-1">
+                <span className="text-slate-600 font-light">Season:</span>
+                <div className="flex flex-wrap gap-2">
                   {item.season.map((season, idx) => (
                     <span
                       key={idx}
-                      className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded-full"
+                      className="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-light rounded-xl"
                     >
                       {season}
                     </span>

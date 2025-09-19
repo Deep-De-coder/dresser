@@ -83,24 +83,24 @@ export default function AskDresser({ userId }: AskDresserProps) {
   return (
     <div className="space-y-6">
       {/* Chat Input */}
-      <form onSubmit={handleSubmit} className="flex gap-3">
-        <div className="flex-1 relative">
-          <input
-            type="text"
-            value={prompt}
-            onChange={(e) => setPrompt(e.target.value)}
-            placeholder="Ask Dresser: 'What should I wear for a business meeting tomorrow?'"
-            className="w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 placeholder-gray-500"
-            disabled={isLoading}
-          />
-          <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
-            <Sparkles className="w-5 h-5 text-gray-400" />
+        <form onSubmit={handleSubmit} className="flex gap-4">
+          <div className="flex-1 relative">
+            <input
+              type="text"
+              value={prompt}
+              onChange={(e) => setPrompt(e.target.value)}
+              placeholder="Ask Dresser: 'What should I wear for a business meeting tomorrow?'"
+              className="w-full px-6 py-4 pr-14 border border-slate-300 rounded-2xl focus:ring-2 focus:ring-slate-500 focus:border-transparent text-slate-900 placeholder-slate-500 font-light text-lg shadow-lg"
+              disabled={isLoading}
+            />
+            <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
+              <Sparkles className="w-6 h-6 text-slate-400" />
+            </div>
           </div>
-        </div>
         <button
           type="submit"
           disabled={!prompt.trim() || isLoading}
-          className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+          className="px-8 py-4 bg-slate-700 text-white rounded-2xl hover:bg-slate-800 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-3 font-light text-lg shadow-lg transition-all duration-200"
         >
           {isLoading ? (
             <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
