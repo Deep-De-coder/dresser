@@ -1,9 +1,9 @@
 'use client'
 
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useDropzone } from 'react-dropzone'
-import { Upload, Camera, Sparkles, CheckCircle, AlertCircle } from 'lucide-react'
+import { Upload, Camera, Sparkles, CheckCircle, AlertCircle, RefreshCw, X } from 'lucide-react'
 
 import { UploadedItem } from '../types'
 
@@ -11,45 +11,100 @@ export default function PhotoUpload() {
   const [uploadedItems, setUploadedItems] = useState<UploadedItem[]>([])
   const [isProcessing, setIsProcessing] = useState(false)
   const [processingProgress, setProcessingProgress] = useState(0)
+  const [currentImage, setCurrentImage] = useState<string | null>(null)
+  const [currentImageName, setCurrentImageName] = useState<string>('')
+  const fileInputRef = useRef<HTMLInputElement>(null)
+
+  const processFile = async (file: File) => {
+    // Set current image immediately
+    setCurrentImage(URL.createObjectURL(file))
+    setCurrentImageName(file.name.replace(/\.[^/.]+$/, ''))
+    
+    // Simulate processing time
+    await new Promise(resolve => setTimeout(resolve, 2000))
+    
+    // Simulate AI categorization
+    const categories = ['Shirt', 'Pants', 'Jacket', 'Dress', 'Shoes', 'Accessory']
+    const randomCategory = categories[Math.floor(Math.random() * categories.length)]
+    const confidence = Math.random() * 0.3 + 0.7 // 70-100% confidence
+
+    const newItem: UploadedItem = {
+      id: Date.now().toString(),
+      name: file.name.replace(/\.[^/.]+$/, ''),
+      category: randomCategory,
+      imageUrl: URL.createObjectURL(file),
+      confidence: confidence
+    }
+
+    setUploadedItems(prev => [...prev, newItem])
+  }
 
   const onDrop = useCallback(async (acceptedFiles: File[]) => {
+    if (acceptedFiles.length === 0) return
+    
+    const file = acceptedFiles[0] // Only process the first file
     setIsProcessing(true)
     setProcessingProgress(0)
 
-    // Simulate AI processing
-    for (let i = 0; i < acceptedFiles.length; i++) {
-      const file = acceptedFiles[i]
-      
-      // Simulate processing time
-      await new Promise(resolve => setTimeout(resolve, 1000))
-      setProcessingProgress(((i + 1) / acceptedFiles.length) * 100)
+    // Simulate progress
+    const progressInterval = setInterval(() => {
+      setProcessingProgress(prev => {
+        if (prev >= 90) {
+          clearInterval(progressInterval)
+          return 90
+        }
+        return prev + 10
+      })
+    }, 200)
 
-      // Simulate AI categorization
-      const categories = ['Shirt', 'Pants', 'Jacket', 'Dress', 'Shoes', 'Accessory']
-      const randomCategory = categories[Math.floor(Math.random() * categories.length)]
-      const confidence = Math.random() * 0.3 + 0.7 // 70-100% confidence
-
-      const newItem: UploadedItem = {
-        id: Date.now().toString() + i,
-        name: file.name.replace(/\.[^/.]+$/, ''),
-        category: randomCategory,
-        imageUrl: URL.createObjectURL(file),
-        confidence: confidence
-      }
-
-      setUploadedItems(prev => [...prev, newItem])
-    }
-
+    await processFile(file)
+    
+    clearInterval(progressInterval)
+    setProcessingProgress(100)
     setIsProcessing(false)
-    setProcessingProgress(0)
   }, [])
+
+  const handleReplaceImage = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click()
+    }
+  }
+
+  const handleFileSelect = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    if (file) {
+      setIsProcessing(true)
+      setProcessingProgress(0)
+      
+      const progressInterval = setInterval(() => {
+        setProcessingProgress(prev => {
+          if (prev >= 90) {
+            clearInterval(progressInterval)
+            return 90
+          }
+          return prev + 10
+        })
+      }, 200)
+
+      await processFile(file)
+      
+      clearInterval(progressInterval)
+      setProcessingProgress(100)
+      setIsProcessing(false)
+    }
+  }
+
+  const clearCurrentImage = () => {
+    setCurrentImage(null)
+    setCurrentImageName('')
+  }
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     accept: {
       'image/*': ['.jpeg', '.jpg', '.png', '.webp']
     },
-    multiple: true
+    multiple: false
   })
 
   const removeItem = (id: string) => {
@@ -58,47 +113,109 @@ export default function PhotoUpload() {
 
   return (
     <div className="space-y-6">
-      {/* Upload Area */}
-      <div
-        {...getRootProps()}
-        className={`border-2 border-dashed rounded-xl p-8 text-center transition-all duration-200 cursor-pointer ${
-          isDragActive
-            ? 'border-blue-500 bg-blue-50'
-            : 'border-gray-300 hover:border-blue-400 hover:bg-gray-50'
-        }`}
-      >
-        <input {...getInputProps()} />
-        
+      {/* Hidden file input for replace functionality */}
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept="image/*"
+        onChange={handleFileSelect}
+        className="hidden"
+      />
+
+      {/* Current Image Display */}
+      {currentImage && (
         <motion.div
-          initial={{ scale: 0.9, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.3 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-white rounded-xl border border-gray-200 p-6"
         >
-          {isDragActive ? (
-            <div className="space-y-4">
-              <Upload className="w-12 h-12 text-blue-500 mx-auto" />
-              <p className="text-lg font-medium text-blue-600">Drop your photos here</p>
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-lg font-semibold text-gray-900">Current Image</h3>
+            <button
+              onClick={clearCurrentImage}
+              className="text-gray-400 hover:text-gray-600 transition-colors"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+          
+          <div className="flex items-center space-x-6">
+            <div className="relative">
+              <img
+                src={currentImage}
+                alt={currentImageName}
+                className="w-32 h-32 object-cover rounded-lg border border-gray-200"
+              />
+              {isProcessing && (
+                <div className="absolute inset-0 bg-black bg-opacity-50 rounded-lg flex items-center justify-center">
+                  <div className="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                </div>
+              )}
             </div>
-          ) : (
-            <div className="space-y-4">
-              <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center mx-auto">
-                <Camera className="w-8 h-8 text-white" />
-              </div>
-              <div>
-                <p className="text-lg font-medium text-gray-900 mb-2">
-                  Upload your clothing photos
-                </p>
-                <p className="text-gray-600 mb-4">
-                  Drag and drop photos here, or click to select files
-                </p>
+            
+            <div className="flex-1">
+              <h4 className="font-medium text-gray-900 mb-2">{currentImageName}</h4>
+              <div className="space-y-2">
+                <button
+                  onClick={handleReplaceImage}
+                  disabled={isProcessing}
+                  className="flex items-center space-x-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                >
+                  <RefreshCw className="w-4 h-4" />
+                  <span>Replace Image</span>
+                </button>
                 <p className="text-sm text-gray-500">
-                  Supports JPEG, PNG, and WebP formats
+                  Click to select a different image
                 </p>
               </div>
             </div>
-          )}
+          </div>
         </motion.div>
-      </div>
+      )}
+
+      {/* Upload Area - Only show when no current image */}
+      {!currentImage && (
+        <div
+          {...getRootProps()}
+          className={`border-2 border-dashed rounded-xl p-8 text-center transition-all duration-200 cursor-pointer ${
+            isDragActive
+              ? 'border-blue-500 bg-blue-50'
+              : 'border-gray-300 hover:border-blue-400 hover:bg-gray-50'
+          }`}
+        >
+          <input {...getInputProps()} />
+          
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.3 }}
+          >
+            {isDragActive ? (
+              <div className="space-y-4">
+                <Upload className="w-12 h-12 text-blue-500 mx-auto" />
+                <p className="text-lg font-medium text-blue-600">Drop your photo here</p>
+              </div>
+            ) : (
+              <div className="space-y-4">
+                <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center mx-auto">
+                  <Camera className="w-8 h-8 text-white" />
+                </div>
+                <div>
+                  <p className="text-lg font-medium text-gray-900 mb-2">
+                    Upload your clothing photo
+                  </p>
+                  <p className="text-gray-600 mb-4">
+                    Drag and drop a photo here, or click to select a file
+                  </p>
+                  <p className="text-sm text-gray-500">
+                    Supports JPEG, PNG, and WebP formats
+                  </p>
+                </div>
+              </div>
+            )}
+          </motion.div>
+        </div>
+      )}
 
       {/* Processing Indicator */}
       <AnimatePresence>
