@@ -70,21 +70,56 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Build messages and call assistant
-    const messages = buildMessages({ query, weather, preferences, items });
-    const rawResponse = await callAssistant(provider, messages);
-    
-    // Shape response into structured format
-    const response = shapeResponse(rawResponse, items);
-    
-    // Add metadata
-    response.meta = {
-      provider: process.env.AI_PROVIDER || "ollama",
-      model: process.env.LLM_MODEL || "phi3:instruct",
-      latencyMs: Date.now() - startTime
-    };
+    try {
+      // Build messages and call assistant
+      const messages = buildMessages({ query, weather, preferences, items });
+      const rawResponse = await callAssistant(provider, messages);
+      
+      // Shape response into structured format
+      const response = shapeResponse(rawResponse, items);
+      
+      // Add metadata
+      response.meta = {
+        provider: process.env.AI_PROVIDER || "ollama",
+        model: process.env.LLM_MODEL || "phi3:instruct",
+        latencyMs: Date.now() - startTime
+      };
 
-    return NextResponse.json(response);
+      return NextResponse.json(response);
+    } catch (providerError: any) {
+      // If Ollama is not running, provide a helpful fallback response
+      if (providerError.code === "OLLAMA_ERROR" || providerError.message?.includes("fetch failed")) {
+        const fallbackResponse = {
+          replyText: `I'd love to help you with outfit suggestions! However, I need Ollama to be running to provide AI-powered recommendations. 
+
+For now, here's a general suggestion: ${query.toLowerCase().includes('dress') ? 'A comfortable dress with appropriate accessories would work well for today.' : 'Consider layering with a nice top and bottoms, plus comfortable shoes.'}
+
+To get full AI assistance, please:
+1. Install Ollama: https://ollama.ai
+2. Run: ollama pull phi3:instruct
+3. Start Ollama: ollama serve`,
+          plan: {
+            top: "Suggested top based on your query",
+            bottom: "Suggested bottom based on your query", 
+            shoes: "Comfortable shoes appropriate for the occasion",
+            outerwear: "Layer as needed for weather",
+            accessories: ["Minimal accessories"]
+          },
+          rationale: "This is a fallback suggestion while AI services are being set up.",
+          usedItems: [],
+          meta: {
+            provider: "fallback",
+            model: "none",
+            latencyMs: Date.now() - startTime
+          }
+        };
+        
+        return NextResponse.json(fallbackResponse);
+      }
+      
+      // Re-throw other errors
+      throw providerError;
+    }
 
   } catch (error: any) {
     console.error("Assistant API error:", error);
