@@ -1,11 +1,22 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Sparkles, Menu, X } from 'lucide-react'
+import { Sparkles, Menu, X, Bot, Grid3X3 } from 'lucide-react'
 import { useState } from 'react'
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId)
+    if (element) {
+      element.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      })
+    }
+    setIsMobileMenuOpen(false)
+  }
 
   return (
     <header className="bg-white/80 backdrop-blur-md border-b border-gray-200 sticky top-0 z-50">
@@ -28,15 +39,20 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <a href="#features" className="text-gray-600 hover:text-blue-600 transition-colors">
-              Features
-            </a>
-            <a href="#about" className="text-gray-600 hover:text-blue-600 transition-colors">
-              About
-            </a>
-            <a href="#contact" className="text-gray-600 hover:text-blue-600 transition-colors">
-              Contact
-            </a>
+            <button 
+              onClick={() => scrollToSection('ai-assistant')}
+              className="flex items-center space-x-2 text-gray-600 hover:text-blue-600 transition-colors"
+            >
+              <Bot className="w-4 h-4" />
+              <span>AI Assistant</span>
+            </button>
+            <button 
+              onClick={() => scrollToSection('my-wardrobe')}
+              className="flex items-center space-x-2 text-gray-600 hover:text-blue-600 transition-colors"
+            >
+              <Grid3X3 className="w-4 h-4" />
+              <span>My Wardrobe</span>
+            </button>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -62,27 +78,20 @@ export default function Header() {
             className="md:hidden border-t border-gray-200 py-4"
           >
             <nav className="flex flex-col space-y-4">
-              <a 
-                href="#features" 
-                className="text-gray-600 hover:text-blue-600 transition-colors"
-                onClick={() => setIsMobileMenuOpen(false)}
+              <button 
+                onClick={() => scrollToSection('ai-assistant')}
+                className="flex items-center space-x-2 text-gray-600 hover:text-blue-600 transition-colors text-left"
               >
-                Features
-              </a>
-              <a 
-                href="#about" 
-                className="text-gray-600 hover:text-blue-600 transition-colors"
-                onClick={() => setIsMobileMenuOpen(false)}
+                <Bot className="w-4 h-4" />
+                <span>AI Assistant</span>
+              </button>
+              <button 
+                onClick={() => scrollToSection('my-wardrobe')}
+                className="flex items-center space-x-2 text-gray-600 hover:text-blue-600 transition-colors text-left"
               >
-                About
-              </a>
-              <a 
-                href="#contact" 
-                className="text-gray-600 hover:text-blue-600 transition-colors"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Contact
-              </a>
+                <Grid3X3 className="w-4 h-4" />
+                <span>My Wardrobe</span>
+              </button>
             </nav>
           </motion.div>
         )}

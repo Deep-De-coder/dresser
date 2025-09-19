@@ -87,6 +87,7 @@ export default function Home() {
 
         {/* AI Assistant Section */}
         <motion.div 
+          id="ai-assistant"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
@@ -153,6 +154,7 @@ export default function Home() {
 
         {/* Wardrobe Grid and Search - Moved to Bottom */}
         <motion.div 
+          id="my-wardrobe"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
