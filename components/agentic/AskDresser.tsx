@@ -4,19 +4,22 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Send, Sparkles, ThumbsUp, ThumbsDown, MessageSquare } from 'lucide-react'
 
-interface OutfitSuggestion {
-  id: string
-  items: Array<{
-    id: string
-    title: string
-    category: string
-    imageUrl: string
-    colors: string[]
-    formality: string
-  }>
+interface AssistantResponse {
+  replyText: string
+  plan: {
+    top?: string
+    bottom?: string
+    shoes?: string
+    outerwear?: string
+    accessories?: string[]
+  }
   rationale: string
-  score: number
-  confidence: number
+  usedItems: string[]
+  meta: {
+    provider: string
+    model: string
+    latencyMs: number
+  }
 }
 
 interface AskDresserProps {
@@ -26,43 +29,45 @@ interface AskDresserProps {
 export default function AskDresser({ userId }: AskDresserProps) {
   const [prompt, setPrompt] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-  const [suggestions, setSuggestions] = useState<OutfitSuggestion[]>([])
-  const [feedback, setFeedback] = useState<{ [key: string]: 'accepted' | 'rejected' | null }>({})
+  const [response, setResponse] = useState<AssistantResponse | null>(null)
+  const [error, setError] = useState<string | null>(null)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!prompt.trim() || isLoading) return
 
     setIsLoading(true)
+    setError(null)
+    setResponse(null)
+    
     try {
-      const response = await fetch('/api/stylist', {
+      const response = await fetch('/api/assistant', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          userId,
-          prompt: prompt.trim(),
-          constraints: {
-            weather: { city: 'New York' } // Default city
-          }
+          query: prompt.trim(),
+          weather: { tempC: 20, condition: 'sunny' }, // Default weather
+          preferences: { style: 'casual' },
+          items: [] // Empty for now - will be populated from wardrobe later
         })
       })
 
       const data = await response.json()
-      if (data.success) {
-        setSuggestions(data.outfits)
-        setFeedback({})
+      if (response.ok) {
+        setResponse(data)
       } else {
-        console.error('Stylist API error:', data.error)
+        setError(data.error || 'Failed to get outfit suggestions')
       }
     } catch (error) {
       console.error('Failed to get outfit suggestions:', error)
+      setError('Network error. Please try again.')
     } finally {
       setIsLoading(false)
     }
   }
 
-  const handleFeedback = async (outfitId: string, decision: 'accepted' | 'rejected') => {
-    setFeedback(prev => ({ ...prev, [outfitId]: decision }))
+  const handleFeedback = async (decision: 'accepted' | 'rejected') => {
+    if (!response) return
 
     try {
       await fetch('/api/feedback', {
@@ -70,7 +75,7 @@ export default function AskDresser({ userId }: AskDresserProps) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           userId,
-          outfitId,
+          outfitId: 'assistant-response',
           decision,
           reason: decision === 'accepted' ? 'User approved this outfit' : 'User rejected this outfit'
         })
@@ -130,103 +135,122 @@ export default function AskDresser({ userId }: AskDresserProps) {
         )}
       </AnimatePresence>
 
-      {/* Outfit Suggestions */}
+      {/* Error State */}
       <AnimatePresence>
-        {suggestions.length > 0 && (
+        {error && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="bg-red-50 border border-red-200 rounded-lg p-4"
+          >
+            <p className="text-red-800">{error}</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Assistant Response */}
+      <AnimatePresence>
+        {response && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="space-y-4"
           >
-            <h3 className="text-lg font-semibold text-gray-900">Outfit Suggestions</h3>
-            {suggestions.map((suggestion, index) => (
-              <motion.div
-                key={suggestion.id}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-white rounded-xl border border-gray-200 p-6"
-              >
-                {/* Outfit Items */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
-                  {suggestion.items.map((item) => (
-                    <div key={item.id} className="text-center">
-                      <div className="aspect-square bg-gray-100 rounded-lg mb-2 overflow-hidden">
-                        <img
-                          src={item.imageUrl}
-                          alt={item.title}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                      <p className="text-sm font-medium text-gray-900">{item.title}</p>
-                      <p className="text-xs text-gray-600">{item.category}</p>
-                    </div>
-                  ))}
+            {/* Reply Text */}
+            <div className="bg-white rounded-xl border border-slate-200 p-6">
+              <div className="flex items-start space-x-3">
+                <div className="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center">
+                  <Sparkles className="w-4 h-4 text-slate-600" />
                 </div>
+                <div className="flex-1">
+                  <p className="text-slate-800 leading-relaxed">{response.replyText}</p>
+                </div>
+              </div>
+            </div>
 
-                {/* Rationale */}
-                <div className="bg-gray-50 rounded-lg p-4 mb-4">
-                  <div className="flex items-start space-x-2">
-                    <MessageSquare className="w-5 h-5 text-gray-600 mt-0.5" />
-                    <div>
-                      <p className="text-sm font-medium text-gray-900 mb-1">Dresser's Reasoning</p>
-                      <p className="text-sm text-gray-700">{suggestion.rationale}</p>
+            {/* Outfit Plan */}
+            {response.plan && (
+              <div className="bg-white rounded-xl border border-slate-200 p-6">
+                <h3 className="text-lg font-light text-slate-800 mb-4">Outfit Plan</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {response.plan.top && (
+                    <div className="flex items-center space-x-3">
+                      <div className="w-2 h-2 bg-slate-400 rounded-full"></div>
+                      <span className="text-slate-700"><strong>Top:</strong> {response.plan.top}</span>
                     </div>
+                  )}
+                  {response.plan.bottom && (
+                    <div className="flex items-center space-x-3">
+                      <div className="w-2 h-2 bg-slate-400 rounded-full"></div>
+                      <span className="text-slate-700"><strong>Bottom:</strong> {response.plan.bottom}</span>
+                    </div>
+                  )}
+                  {response.plan.shoes && (
+                    <div className="flex items-center space-x-3">
+                      <div className="w-2 h-2 bg-slate-400 rounded-full"></div>
+                      <span className="text-slate-700"><strong>Shoes:</strong> {response.plan.shoes}</span>
+                    </div>
+                  )}
+                  {response.plan.outerwear && (
+                    <div className="flex items-center space-x-3">
+                      <div className="w-2 h-2 bg-slate-400 rounded-full"></div>
+                      <span className="text-slate-700"><strong>Outerwear:</strong> {response.plan.outerwear}</span>
+                    </div>
+                  )}
+                  {response.plan.accessories && response.plan.accessories.length > 0 && (
+                    <div className="flex items-center space-x-3">
+                      <div className="w-2 h-2 bg-slate-400 rounded-full"></div>
+                      <span className="text-slate-700"><strong>Accessories:</strong> {response.plan.accessories.join(', ')}</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* Rationale */}
+            {response.rationale && (
+              <div className="bg-slate-50 rounded-lg p-4">
+                <div className="flex items-start space-x-2">
+                  <MessageSquare className="w-5 h-5 text-slate-600 mt-0.5" />
+                  <div>
+                    <p className="text-sm font-medium text-slate-800 mb-1">Dresser's Reasoning</p>
+                    <p className="text-sm text-slate-700">{response.rationale}</p>
                   </div>
                 </div>
+              </div>
+            )}
 
-                {/* Score and Feedback */}
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-4">
-                    <div className="text-sm">
-                      <span className="text-gray-600">Score: </span>
-                      <span className="font-medium text-gray-900">
-                        {Math.round(suggestion.score * 100)}%
-                      </span>
-                    </div>
-                    <div className="text-sm">
-                      <span className="text-gray-600">Confidence: </span>
-                      <span className="font-medium text-gray-900">
-                        {Math.round(suggestion.confidence * 100)}%
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center space-x-2">
-                    <button
-                      onClick={() => handleFeedback(suggestion.id, 'accepted')}
-                      className={`p-2 rounded-lg transition-colors ${
-                        feedback[suggestion.id] === 'accepted'
-                          ? 'bg-green-100 text-green-600'
-                          : 'bg-gray-100 text-gray-600 hover:bg-green-100 hover:text-green-600'
-                      }`}
-                    >
-                      <ThumbsUp className="w-5 h-5" />
-                    </button>
-                    <button
-                      onClick={() => handleFeedback(suggestion.id, 'rejected')}
-                      className={`p-2 rounded-lg transition-colors ${
-                        feedback[suggestion.id] === 'rejected'
-                          ? 'bg-red-100 text-red-600'
-                          : 'bg-gray-100 text-gray-600 hover:bg-red-100 hover:text-red-600'
-                      }`}
-                    >
-                      <ThumbsDown className="w-5 h-5" />
-                    </button>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+            {/* Feedback */}
+            <div className="flex items-center justify-between">
+              <div className="text-xs text-slate-500">
+                Powered by {response.meta.provider} ({response.meta.model}) • {response.meta.latencyMs}ms
+              </div>
+              <div className="flex items-center space-x-2">
+                <button
+                  onClick={() => handleFeedback('accepted')}
+                  className="p-2 rounded-lg bg-slate-100 text-slate-600 hover:bg-green-100 hover:text-green-600 transition-colors"
+                >
+                  <ThumbsUp className="w-5 h-5" />
+                </button>
+                <button
+                  onClick={() => handleFeedback('rejected')}
+                  className="p-2 rounded-lg bg-slate-100 text-slate-600 hover:bg-red-100 hover:text-red-600 transition-colors"
+                >
+                  <ThumbsDown className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
 
       {/* Empty State */}
-      {!isLoading && suggestions.length === 0 && (
+      {!isLoading && !response && !error && (
         <div className="text-center py-12">
-          <Sparkles className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-          <h3 className="text-lg font-medium text-gray-900 mb-2">Ask Dresser Anything</h3>
-          <p className="text-gray-600 max-w-md mx-auto">
+          <Sparkles className="w-12 h-12 text-slate-400 mx-auto mb-4" />
+          <h3 className="text-lg font-light text-slate-800 mb-2">Ask Dresser Anything</h3>
+          <p className="text-slate-600 max-w-md mx-auto">
             Get personalized outfit suggestions based on your wardrobe, weather, and style preferences.
           </p>
         </div>
