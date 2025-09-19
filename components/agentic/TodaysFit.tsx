@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react'
 import { motion } from 'framer-motion'
-import { Zap, CheckCircle, XCircle, RefreshCw } from 'lucide-react'
+import { Zap, CheckCircle, XCircle } from 'lucide-react'
 import Image from 'next/image'
 
 interface TodaysFitProps {
@@ -111,13 +111,6 @@ export default function TodaysFit({ userId }: TodaysFitProps) {
           <Zap className="w-6 h-6 text-blue-600" />
           <h3 className="text-lg font-semibold text-gray-900">{"Today's Fit"}</h3>
         </div>
-        <button
-          onClick={getTodaysSuggestion}
-          disabled={isLoading}
-          className="p-2 text-gray-600 hover:text-blue-600 transition-colors"
-        >
-          <RefreshCw className={`w-5 h-5 ${isLoading ? 'animate-spin' : ''}`} />
-        </button>
       </div>
 
       {isLoading ? (
