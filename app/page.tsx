@@ -8,7 +8,6 @@ import PhotoUpload from '../components/PhotoUpload'
 import WardrobeGrid from '../components/WardrobeGrid'
 import CategoryFilter from '../components/CategoryFilter'
 import { AskDresser, TodaysFit, TripPacker, Insights } from '../components/agentic'
-import WardrobeAnalyzer from '../components/WardrobeAnalyzer'
 
 export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
@@ -86,28 +85,12 @@ export default function Home() {
           </div>
         </motion.div>
 
-          {/* Azure Vision API Test Section */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="bg-white rounded-3xl shadow-2xl border border-slate-100 overflow-hidden mb-12"
-          >
-            <div className="p-8">
-              <h2 className="text-3xl font-light text-slate-800 mb-6 flex items-center">
-                <Sparkles className="w-7 h-7 mr-4 text-slate-600" />
-                Azure Vision API Test
-              </h2>
-              <WardrobeAnalyzer />
-            </div>
-          </motion.div>
-
           {/* AI Assistant Section */}
           <motion.div 
             id="ai-assistant"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
             className="bg-white rounded-3xl shadow-2xl border border-slate-100 overflow-hidden mb-12"
           >
             <div className="p-8">
@@ -174,7 +157,7 @@ export default function Home() {
           id="my-wardrobe"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
           className="bg-white rounded-3xl shadow-2xl border border-slate-100 overflow-hidden"
         >
           <div className="p-8">

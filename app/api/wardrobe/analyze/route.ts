@@ -58,6 +58,14 @@ export async function POST(req: NextRequest) {
     const { imageUrl } = await req.json();
     if (!imageUrl) return NextResponse.json({ error: "imageUrl is required" }, { status: 400 });
 
+    // Check if environment variables are available
+    if (!ENDPOINT || !KEY) {
+      return NextResponse.json({ 
+        error: "Azure Vision API credentials not configured",
+        details: `ENDPOINT: ${!!ENDPOINT}, KEY: ${!!KEY}`
+      }, { status: 500 });
+    }
+
     const url = new URL(`${ENDPOINT}/vision/v3.2/analyze`);
     url.searchParams.set("visualFeatures", ["Tags", "Objects", "Color"].join(","));
 
