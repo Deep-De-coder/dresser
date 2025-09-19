@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { Heart, MoreVertical, Tag } from 'lucide-react'
 import { useState } from 'react'
+import Image from 'next/image'
 
 import { WardrobeItem } from '../types'
 
@@ -113,10 +114,11 @@ export default function WardrobeGrid({ category }: WardrobeGridProps) {
         >
           {/* Image */}
           <div className="relative aspect-square overflow-hidden">
-            <img
+            <Image
               src={item.imageUrl}
               alt={item.name}
-              className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+              fill
+              className="object-cover hover:scale-105 transition-transform duration-300"
             />
             
             {/* Favorite Button */}

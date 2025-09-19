@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { MapPin, Calendar, Activity, Luggage, CheckCircle } from 'lucide-react'
+import Image from 'next/image'
 
 interface TripPackerProps {
   userId: string
@@ -177,11 +178,12 @@ export default function TripPacker({ userId }: TripPackerProps) {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                   {outfit.items.map((item) => (
                     <div key={item.id} className="text-center">
-                      <div className="aspect-square bg-gray-100 rounded-lg mb-2 overflow-hidden">
-                        <img
+                      <div className="aspect-square bg-gray-100 rounded-lg mb-2 overflow-hidden relative">
+                        <Image
                           src={item.imageUrl}
                           alt={item.title}
-                          className="w-full h-full object-cover"
+                          fill
+                          className="object-cover"
                         />
                       </div>
                       <p className="text-sm font-medium text-gray-900">{item.title}</p>

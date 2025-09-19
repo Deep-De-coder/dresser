@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import { BarChart3, TrendingUp, AlertCircle, Lightbulb, Clock } from 'lucide-react'
 
@@ -35,11 +35,7 @@ export default function Insights({ userId }: InsightsProps) {
   const [insights, setInsights] = useState<InsightData | null>(null)
   const [isLoading, setIsLoading] = useState(true)
 
-  useEffect(() => {
-    fetchInsights()
-  }, [userId])
-
-  const fetchInsights = async () => {
+  const fetchInsights = useCallback(async () => {
     setIsLoading(true)
     try {
       const response = await fetch(`/api/gaps?userId=${userId}`)
@@ -63,7 +59,11 @@ export default function Insights({ userId }: InsightsProps) {
     } finally {
       setIsLoading(false)
     }
-  }
+  }, [userId])
+
+  useEffect(() => {
+    fetchInsights()
+  }, [fetchInsights])
 
   if (isLoading) {
     return (

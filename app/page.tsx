@@ -199,7 +199,7 @@ export default function Home() {
                 <span>deepshahane@gmail.com</span>
               </a>
               <a 
-                href="https://linkedin.com/in/deepshahane"
+                href="https://www.linkedin.com/in/deep-shahane/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center space-x-3 bg-blue-600 text-white px-6 py-3 rounded-xl hover:bg-blue-700 transition-all duration-200 font-light"

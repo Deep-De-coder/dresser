@@ -4,6 +4,7 @@ import { useState, useCallback, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useDropzone } from 'react-dropzone'
 import { Upload, Camera, Sparkles, CheckCircle, Trash2, RefreshCw, X } from 'lucide-react'
+import Image from 'next/image'
 
 import { UploadedItem } from '../types'
 
@@ -172,11 +173,12 @@ export default function PhotoUpload() {
           </div>
           
           <div className="flex items-center space-x-8">
-            <div className="relative">
-              <img
+            <div className="relative w-40 h-40">
+              <Image
                 src={currentImage}
                 alt={currentImageName}
-                className="w-40 h-40 object-cover rounded-2xl border border-slate-200 shadow-lg"
+                fill
+                className="object-cover rounded-2xl border border-slate-200 shadow-lg"
               />
               {isProcessing && (
                 <div className="absolute inset-0 bg-black bg-opacity-50 rounded-2xl flex items-center justify-center">
@@ -292,11 +294,14 @@ export default function PhotoUpload() {
                   transition={{ delay: index * 0.1 }}
                   className="bg-white rounded-2xl border border-slate-200 p-6 flex items-center space-x-6 shadow-lg"
                 >
-                  <img
-                    src={item.imageUrl}
-                    alt={item.name}
-                    className="w-20 h-20 object-cover rounded-xl border border-slate-200"
-                  />
+                  <div className="relative w-20 h-20">
+                    <Image
+                      src={item.imageUrl}
+                      alt={item.name}
+                      fill
+                      className="object-cover rounded-xl border border-slate-200"
+                    />
+                  </div>
                   <div className="flex-1">
                     <h4 className="font-light text-slate-800 text-lg mb-2">{item.name}</h4>
                     <div className="flex items-center space-x-3 mt-2">

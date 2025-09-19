@@ -1,8 +1,9 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import { Zap, CheckCircle, XCircle, RefreshCw } from 'lucide-react'
+import Image from 'next/image'
 
 interface TodaysFitProps {
   userId: string
@@ -29,7 +30,7 @@ export default function TodaysFit({ userId }: TodaysFitProps) {
   const [isLoading, setIsLoading] = useState(false)
   const [isMarkedWorn, setIsMarkedWorn] = useState(false)
 
-  const getTodaysSuggestion = async () => {
+  const getTodaysSuggestion = useCallback(async () => {
     setIsLoading(true)
     try {
       const response = await fetch('/api/stylist', {
@@ -63,7 +64,7 @@ export default function TodaysFit({ userId }: TodaysFitProps) {
     } finally {
       setIsLoading(false)
     }
-  }
+  }, [userId])
 
   const markAsWorn = async () => {
     if (!suggestion) return
@@ -101,7 +102,7 @@ export default function TodaysFit({ userId }: TodaysFitProps) {
 
   useEffect(() => {
     getTodaysSuggestion()
-  }, [userId])
+  }, [getTodaysSuggestion])
 
   return (
     <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-6">
@@ -151,11 +152,12 @@ export default function TodaysFit({ userId }: TodaysFitProps) {
           <div className="grid grid-cols-2 gap-3">
             {suggestion.items.map((item) => (
               <div key={item.id} className="bg-white rounded-lg p-3">
-                <div className="aspect-square bg-gray-100 rounded-lg mb-2 overflow-hidden">
-                  <img
+                <div className="aspect-square bg-gray-100 rounded-lg mb-2 overflow-hidden relative">
+                  <Image
                     src={item.imageUrl}
                     alt={item.title}
-                    className="w-full h-full object-cover"
+                    fill
+                    className="object-cover"
                   />
                 </div>
                 <p className="text-sm font-medium text-gray-900 truncate">{item.title}</p>
