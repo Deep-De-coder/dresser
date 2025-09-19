@@ -109,7 +109,7 @@ export default function TodaysFit({ userId }: TodaysFitProps) {
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center space-x-2">
           <Zap className="w-6 h-6 text-blue-600" />
-          <h3 className="text-lg font-semibold text-gray-900">Today&apos;s Fit</h3>
+          <h3 className="text-lg font-semibold text-gray-900">{"Today's Fit"}</h3>
         </div>
         <button
           onClick={getTodaysSuggestion}
@@ -140,7 +140,7 @@ export default function TodaysFit({ userId }: TodaysFitProps) {
                 </span>
               </div>
               <div>
-                <p className="text-sm font-medium text-gray-900">Today&apos;s Weather</p>
+                <p className="text-sm font-medium text-gray-900">{"Today's Weather"}</p>
                 <p className="text-xs text-gray-600 capitalize">
                   {suggestion.weather.condition}
                 </p>

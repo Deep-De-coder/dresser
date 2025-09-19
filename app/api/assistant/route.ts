@@ -158,7 +158,7 @@ export async function POST(request: NextRequest) {
           }
           
           const fallbackResponse = {
-            replyText: `I'd love to help you with outfit suggestions! Here's my recommendation: ${suggestion}`,
+            replyText: `${suggestion}`,
             plan: plan,
             rationale: "This recommendation is based on styling best practices for your specific request. I've considered the occasion, comfort, and style factors to give you a well-rounded outfit suggestion.",
             usedItems: [],
@@ -284,7 +284,7 @@ export async function POST(request: NextRequest) {
          }
          
             const fallbackResponse = {
-              replyText: `I'd love to help you with outfit suggestions! Here's my recommendation: ${suggestion}`,
+              replyText: `${suggestion}`,
            plan: plan,
            rationale: "This recommendation is based on styling best practices for your specific request. I've considered the occasion, comfort, and style factors to give you a well-rounded outfit suggestion.",
            usedItems: [],

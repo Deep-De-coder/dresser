@@ -214,7 +214,7 @@ export default function AskDresser({ userId }: AskDresserProps) {
                 <div className="flex items-start space-x-2">
                   <MessageSquare className="w-5 h-5 text-slate-600 mt-0.5" />
                   <div>
-                    <p className="text-sm font-medium text-slate-800 mb-1">Dresser&apos;s Reasoning</p>
+                    <p className="text-sm font-medium text-slate-800 mb-1">{"Dresser's Reasoning"}</p>
                     <p className="text-sm text-slate-700">{response.rationale}</p>
                   </div>
                 </div>
