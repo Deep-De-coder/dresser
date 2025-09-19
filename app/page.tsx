@@ -88,7 +88,7 @@ export default function Home() {
                       : 'text-slate-500 hover:text-slate-700 hover:border-b-2 hover:border-slate-300'
                   }`}
                 >
-                  Today's Fit
+                  Today&apos;s Fit
                 </button>
                 <button
                   onClick={() => setAiTab('trip')}
@@ -170,7 +170,7 @@ export default function Home() {
               <Search className="w-6 h-6 text-slate-700" />
             </div>
             <h3 className="text-lg font-light text-slate-800 mb-2">Intelligent Search</h3>
-            <p className="text-slate-600 leading-relaxed text-sm">Find exactly what you're looking for in your digital wardrobe with semantic search capabilities</p>
+            <p className="text-slate-600 leading-relaxed text-sm">Find exactly what you&apos;re looking for in your digital wardrobe with semantic search capabilities</p>
           </div>
         </motion.div>
 
@@ -185,7 +185,7 @@ export default function Home() {
           <div className="p-6 text-center">
             <h2 className="text-3xl font-light text-slate-800 mb-6">Get In Touch</h2>
             <p className="text-slate-600 mb-8 max-w-2xl mx-auto leading-relaxed">
-              Have questions about Dresser or want to collaborate? I'd love to hear from you.
+              Have questions about Dresser or want to collaborate? I&apos;d love to hear from you.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-8">
               <a 
