@@ -449,6 +449,103 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 - ❌ **Liability**: Limited
 - ❌ **Warranty**: Limited
 
+## 🚀 Deployment Quickstart
+
+### Vercel Deployment
+
+1. **Fork and Deploy**:
+   ```bash
+   # Fork this repository
+   # Connect to Vercel
+   # Deploy from GitHub
+   ```
+
+2. **Required Environment Variables**:
+   ```
+   AZURE_VISION_ENDPOINT=your_azure_endpoint
+   AZURE_VISION_KEY=your_azure_key
+   AI_PROVIDER=ollama
+   LLM_MODEL=phi3:instruct
+   OLLAMA_URL=https://your-proxy.fly.dev/llm
+   OLLAMA_PROXY_KEY=your_proxy_key
+   ```
+
+3. **Deploy**:
+   - Vercel will automatically build and deploy
+   - All API routes run on Node.js runtime
+   - Image optimization configured for Unsplash
+
+### Fly.io LLM Proxy Setup
+
+#### App A: Ollama Service (Private)
+```bash
+# Create private Ollama app
+fly apps create dresser-ollama
+
+# Deploy Ollama with internal networking
+fly deploy --config infra/ollama/fly.toml
+
+# Pre-pull the model
+fly ssh console -a dresser-ollama
+ollama pull phi3:instruct
+```
+
+#### App B: LLM Proxy (Public)
+```bash
+# Create public proxy app
+fly apps create dresser-llm-proxy
+
+# Set proxy key secret
+fly secrets set PROXY_KEY=your-secure-random-key -a dresser-llm-proxy
+
+# Deploy the proxy
+cd infra/llm-proxy
+fly deploy -a dresser-llm-proxy
+```
+
+4. **Configure Vercel**:
+   - Set `OLLAMA_URL` to `https://dresser-llm-proxy.fly.dev/llm`
+   - Set `OLLAMA_PROXY_KEY` to your proxy key
+   - Redeploy Vercel app
+
+### Local Development
+
+1. **Install Dependencies**:
+   ```bash
+   npm install
+   ```
+
+2. **Set up Environment**:
+   ```bash
+   cp .env.example .env.local
+   # Edit .env.local with your API keys
+   ```
+
+3. **Run Development Server**:
+   ```bash
+   npm run dev
+   ```
+
+4. **Optional: Local Ollama**:
+   ```bash
+   # Install Ollama
+   curl -fsSL https://ollama.ai/install.sh | sh
+   
+   # Pull model
+   ollama pull phi3:instruct
+   
+   # Start Ollama
+   ollama serve
+   ```
+
+### Production Considerations
+
+- **Azure Vision API**: Required for image analysis
+- **Ollama Proxy**: Handles AI Assistant requests securely
+- **Rate Limiting**: Built-in protection against abuse
+- **Error Handling**: Graceful fallbacks when services unavailable
+- **Security**: API keys secured via environment variables
+
 ## 🏆 Acknowledgments
 
 - **Next.js Team** - For the amazing React framework

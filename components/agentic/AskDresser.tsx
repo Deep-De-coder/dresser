@@ -94,7 +94,7 @@ export default function AskDresser({ userId }: AskDresserProps) {
               type="text"
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
-              placeholder="Ask Dresser: 'What should I wear for a business meeting tomorrow?'"
+              placeholder="Ask Dresser: &quot;What should I wear for a business meeting tomorrow?&quot;"
               className="w-full px-6 py-4 pr-14 border border-slate-300 rounded-2xl focus:ring-2 focus:ring-slate-500 focus:border-transparent text-slate-900 placeholder-slate-500 font-light text-lg shadow-lg"
               disabled={isLoading}
             />
@@ -214,7 +214,7 @@ export default function AskDresser({ userId }: AskDresserProps) {
                 <div className="flex items-start space-x-2">
                   <MessageSquare className="w-5 h-5 text-slate-600 mt-0.5" />
                   <div>
-                    <p className="text-sm font-medium text-slate-800 mb-1">Dresser's Reasoning</p>
+                    <p className="text-sm font-medium text-slate-800 mb-1">Dresser&apos;s Reasoning</p>
                     <p className="text-sm text-slate-700">{response.rationale}</p>
                   </div>
                 </div>

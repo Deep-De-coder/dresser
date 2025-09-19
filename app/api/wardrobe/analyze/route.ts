@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { computeCategory } from "@/utils/category";
 
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+
 type WardrobeAttributes = {
   category?: string;
   colors?: { name?: string; hex?: string }[];

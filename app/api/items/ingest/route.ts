@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from 'next/server'
 import { AgentOrchestrator } from '@/lib/agents'
 import { getDatabase } from '@/lib/db'
 
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+
 const orchestrator = new AgentOrchestrator()
 
 export async function POST(request: NextRequest) {

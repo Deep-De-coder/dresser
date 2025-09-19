@@ -1,0 +1,19 @@
+{
+  "name": "dresser-llm-proxy",
+  "version": "1.0.0",
+  "description": "LLM Proxy for Dresser AI Assistant",
+  "main": "proxy.js",
+  "scripts": {
+    "start": "node proxy.js",
+    "dev": "node proxy.js"
+  },
+  "dependencies": {
+    "fastify": "^4.24.3"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "keywords": ["llm", "proxy", "ollama", "dresser"],
+  "author": "Dresser Team",
+  "license": "MIT"
+}

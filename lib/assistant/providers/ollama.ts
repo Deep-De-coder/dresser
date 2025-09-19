@@ -28,10 +28,12 @@ export interface ProviderError {
 export class OllamaProvider {
   private baseUrl: string;
   private timeout: number;
+  private apiKey?: string;
 
-  constructor(baseUrl: string = "http://127.0.0.1:11434", timeout: number = 15000) {
+  constructor(baseUrl: string = "http://127.0.0.1:11434", timeout: number = 15000, apiKey?: string) {
     this.baseUrl = baseUrl;
     this.timeout = timeout;
+    this.apiKey = apiKey;
   }
 
   async chat(request: OllamaRequest): Promise<string> {
@@ -39,11 +41,18 @@ export class OllamaProvider {
     const timeoutId = setTimeout(() => controller.abort(), this.timeout);
 
     try {
+      const headers: Record<string, string> = {
+        "Content-Type": "application/json",
+      };
+      
+      // Add API key if provided (for proxy authentication)
+      if (this.apiKey) {
+        headers["X-API-Key"] = this.apiKey;
+      }
+
       const response = await fetch(`${this.baseUrl}/api/chat`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers,
         body: JSON.stringify(request),
         signal: controller.signal,
       });

@@ -67,7 +67,8 @@ export function getProvider(): AIProvider | null {
   switch (provider) {
     case "ollama":
       const ollamaUrl = process.env.OLLAMA_URL || "http://127.0.0.1:11434";
-      return new OllamaProvider(ollamaUrl);
+      const ollamaApiKey = process.env.OLLAMA_PROXY_KEY;
+      return new OllamaProvider(ollamaUrl, 15000, ollamaApiKey);
     
     case "openai":
       const apiKey = process.env.OPENAI_API_KEY;

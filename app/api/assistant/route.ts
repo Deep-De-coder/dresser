@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getProvider, buildMessages, callAssistant, shapeResponse } from "@/lib/assistant";
 
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+
 // Rate limiting: simple in-memory sliding window per IP
 const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
 const RATE_LIMIT_WINDOW = 5 * 60 * 1000; // 5 minutes
