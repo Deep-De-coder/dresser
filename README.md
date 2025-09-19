@@ -93,20 +93,86 @@ This project is currently in development for a hackathon. The goal is to bring t
    yarn install
    ```
 
-3. **Run Development Server**
+3. **Set Up Environment Variables**
+   Create a `.env.local` file in the root directory:
+   ```bash
+   # Azure Vision API (for image analysis)
+   AZURE_VISION_ENDPOINT=https://your-cognitive-services.cognitiveservices.azure.com/
+   AZURE_VISION_KEY=your_azure_vision_key
+
+   # AI Assistant Configuration
+   OLLAMA_URL=http://127.0.0.1:11434
+   LLM_MODEL=phi3:instruct
+   AI_PROVIDER=ollama
+
+   # Optional: OpenAI Configuration (for future use)
+   # OPENAI_API_KEY=your_openai_api_key
+   ```
+
+4. **Set Up Ollama (for AI Assistant)**
+   ```bash
+   # Install Ollama (if not already installed)
+   # Visit https://ollama.ai for installation instructions
+   
+   # Pull the required model
+   ollama pull phi3:instruct
+   
+   # Start Ollama service
+   ollama serve
+   ```
+
+5. **Run Development Server**
    ```bash
    npm run dev
    # or
    yarn dev
    ```
 
-4. **Open Your Browser**
+6. **Open Your Browser**
    Navigate to [http://localhost:3000](http://localhost:3000) to see the application.
 
 ### Available Scripts
 - `npm run dev` - Start development server
 - `npm run build` - Build for production
 - `npm run start` - Start production server
+
+### Testing the AI Assistant
+
+Once you have Ollama set up, you can test the AI Assistant API:
+
+```bash
+# Test the assistant endpoint
+curl -X POST http://localhost:3000/api/assistant \
+  -H "Content-Type: application/json" \
+  -d '{
+    "query": "What should I wear for a business meeting tomorrow?",
+    "weather": { "tempC": 12, "condition": "rain", "windKph": 18 },
+    "preferences": { "style": "business-casual", "avoidColors": ["neon"] },
+    "items": [
+      { "id":"i1","name":"Navy blazer","category":"jacket","color":"navy","fabric":"wool","formality":"business" },
+      { "id":"i2","name":"Light blue shirt","category":"shirt","color":"light blue","fabric":"cotton","formality":"business" },
+      { "id":"i3","name":"Chinos","category":"pants","color":"khaki","formality":"business-casual" },
+      { "id":"i4","name":"White sneakers","category":"shoes","color":"white","formality":"casual" }
+    ]
+  }'
+```
+
+Expected response:
+```json
+{
+  "replyText": "For your business meeting in rainy weather, I recommend a professional yet weather-appropriate outfit...",
+  "plan": {
+    "top": "Light blue cotton shirt",
+    "bottom": "Khaki chinos", 
+    "shoes": "Brown leather oxfords (or clean white sneakers if casual is okay)",
+    "outerwear": "Navy wool blazer",
+    "accessories": ["Brown belt", "Minimal watch"]
+  },
+  "rationale": "This combination provides professional appearance while staying warm and dry.",
+  "usedItems": ["i1","i2","i3"],
+  "meta": { "provider": "ollama", "model": "phi3:instruct", "latencyMs": 1200 }
+}
+```
 - `npm run lint` - Run ESLint
 
 ## ✅ Features Implemented
