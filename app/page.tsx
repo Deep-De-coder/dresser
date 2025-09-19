@@ -10,7 +10,6 @@ import CategoryFilter from '../components/CategoryFilter'
 import { AskDresser, TodaysFit, TripPacker, Insights } from '../components/agentic'
 
 export default function Home() {
-  const [activeTab, setActiveTab] = useState<'upload' | 'wardrobe' | 'ai'>('upload')
   const [selectedCategory, setSelectedCategory] = useState<string>('all')
   const [aiTab, setAiTab] = useState<'ask' | 'today' | 'trip' | 'insights'>('ask')
   
@@ -38,12 +37,28 @@ export default function Home() {
           </p>
         </motion.div>
 
-        {/* Feature Cards */}
+        {/* Photo Upload Section - Always Visible */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="grid md:grid-cols-3 gap-6 mb-12"
+          className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden mb-8"
+        >
+          <div className="p-6">
+            <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+              <Upload className="w-6 h-6 mr-3 text-blue-600" />
+              Add New Items
+            </h2>
+            <PhotoUpload />
+          </div>
+        </motion.div>
+
+        {/* Feature Cards */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="grid md:grid-cols-3 gap-6 mb-8"
         >
           <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100">
             <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
@@ -70,115 +85,89 @@ export default function Home() {
           </div>
         </motion.div>
 
-        {/* Main Content Tabs */}
+        {/* AI Assistant Section */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
+          className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden mb-8"
+        >
+          <div className="p-6">
+            <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+              <Sparkles className="w-6 h-6 mr-3 text-purple-600" />
+              AI Assistant
+            </h2>
+            <div className="space-y-6">
+              {/* AI Sub-tabs */}
+              <div className="flex border-b border-gray-200">
+                <button
+                  onClick={() => setAiTab('ask')}
+                  className={`px-4 py-2 text-sm font-medium transition-colors ${
+                    aiTab === 'ask'
+                      ? 'text-blue-600 border-b-2 border-blue-600'
+                      : 'text-gray-500 hover:text-gray-700'
+                  }`}
+                >
+                  Ask Dresser
+                </button>
+                <button
+                  onClick={() => setAiTab('today')}
+                  className={`px-4 py-2 text-sm font-medium transition-colors ${
+                    aiTab === 'today'
+                      ? 'text-blue-600 border-b-2 border-blue-600'
+                      : 'text-gray-500 hover:text-gray-700'
+                  }`}
+                >
+                  Today's Fit
+                </button>
+                <button
+                  onClick={() => setAiTab('trip')}
+                  className={`px-4 py-2 text-sm font-medium transition-colors ${
+                    aiTab === 'trip'
+                      ? 'text-blue-600 border-b-2 border-blue-600'
+                      : 'text-gray-500 hover:text-gray-700'
+                  }`}
+                >
+                  Trip Packer
+                </button>
+                <button
+                  onClick={() => setAiTab('insights')}
+                  className={`px-4 py-2 text-sm font-medium transition-colors ${
+                    aiTab === 'insights'
+                      ? 'text-blue-600 border-b-2 border-blue-600'
+                      : 'text-gray-500 hover:text-gray-700'
+                  }`}
+                >
+                  Insights
+                </button>
+              </div>
+
+              {/* AI Content */}
+              {aiTab === 'ask' && <AskDresser userId={userId} />}
+              {aiTab === 'today' && <TodaysFit userId={userId} />}
+              {aiTab === 'trip' && <TripPacker userId={userId} />}
+              {aiTab === 'insights' && <Insights userId={userId} />}
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Wardrobe Grid and Search - Moved to Bottom */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
           className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden"
         >
-          {/* Tab Navigation */}
-          <div className="flex border-b border-gray-200">
-            <button
-              onClick={() => setActiveTab('upload')}
-              className={`flex-1 px-6 py-4 text-center font-medium transition-colors ${
-                activeTab === 'upload'
-                  ? 'text-blue-600 border-b-2 border-blue-600 bg-blue-50'
-                  : 'text-gray-500 hover:text-gray-700'
-              }`}
-            >
-              <Upload className="w-5 h-5 inline mr-2" />
-              Add Items
-            </button>
-            <button
-              onClick={() => setActiveTab('wardrobe')}
-              className={`flex-1 px-6 py-4 text-center font-medium transition-colors ${
-                activeTab === 'wardrobe'
-                  ? 'text-blue-600 border-b-2 border-blue-600 bg-blue-50'
-                  : 'text-gray-500 hover:text-gray-700'
-              }`}
-            >
-              <Grid className="w-5 h-5 inline mr-2" />
-              My Wardrobe
-            </button>
-            <button
-              onClick={() => setActiveTab('ai')}
-              className={`flex-1 px-6 py-4 text-center font-medium transition-colors ${
-                activeTab === 'ai'
-                  ? 'text-blue-600 border-b-2 border-blue-600 bg-blue-50'
-                  : 'text-gray-500 hover:text-gray-700'
-              }`}
-            >
-              <Sparkles className="w-5 h-5 inline mr-2" />
-              AI Assistant
-            </button>
-          </div>
-
-          {/* Tab Content */}
           <div className="p-6">
-            {activeTab === 'upload' ? (
-              <PhotoUpload />
-            ) : activeTab === 'wardrobe' ? (
-              <div>
-                <CategoryFilter 
-                  selectedCategory={selectedCategory}
-                  onCategoryChange={setSelectedCategory}
-                />
-                <WardrobeGrid category={selectedCategory} />
-              </div>
-            ) : (
-              <div className="space-y-6">
-                {/* AI Sub-tabs */}
-                <div className="flex border-b border-gray-200">
-                  <button
-                    onClick={() => setAiTab('ask')}
-                    className={`px-4 py-2 text-sm font-medium transition-colors ${
-                      aiTab === 'ask'
-                        ? 'text-blue-600 border-b-2 border-blue-600'
-                        : 'text-gray-500 hover:text-gray-700'
-                    }`}
-                  >
-                    Ask Dresser
-                  </button>
-                  <button
-                    onClick={() => setAiTab('today')}
-                    className={`px-4 py-2 text-sm font-medium transition-colors ${
-                      aiTab === 'today'
-                        ? 'text-blue-600 border-b-2 border-blue-600'
-                        : 'text-gray-500 hover:text-gray-700'
-                    }`}
-                  >
-                    Today's Fit
-                  </button>
-                  <button
-                    onClick={() => setAiTab('trip')}
-                    className={`px-4 py-2 text-sm font-medium transition-colors ${
-                      aiTab === 'trip'
-                        ? 'text-blue-600 border-b-2 border-blue-600'
-                        : 'text-gray-500 hover:text-gray-700'
-                    }`}
-                  >
-                    Trip Packer
-                  </button>
-                  <button
-                    onClick={() => setAiTab('insights')}
-                    className={`px-4 py-2 text-sm font-medium transition-colors ${
-                      aiTab === 'insights'
-                        ? 'text-blue-600 border-b-2 border-blue-600'
-                        : 'text-gray-500 hover:text-gray-700'
-                    }`}
-                  >
-                    Insights
-                  </button>
-                </div>
-
-                {/* AI Content */}
-                {aiTab === 'ask' && <AskDresser userId={userId} />}
-                {aiTab === 'today' && <TodaysFit userId={userId} />}
-                {aiTab === 'trip' && <TripPacker userId={userId} />}
-                {aiTab === 'insights' && <Insights userId={userId} />}
-              </div>
-            )}
+            <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+              <Grid className="w-6 h-6 mr-3 text-green-600" />
+              My Wardrobe
+            </h2>
+            <CategoryFilter 
+              selectedCategory={selectedCategory}
+              onCategoryChange={setSelectedCategory}
+            />
+            <WardrobeGrid category={selectedCategory} />
           </div>
         </motion.div>
       </main>
