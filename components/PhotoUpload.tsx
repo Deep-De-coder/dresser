@@ -41,16 +41,13 @@ export default function PhotoUpload() {
       const category = analysis.category ? 
         analysis.category.charAt(0).toUpperCase() + analysis.category.slice(1) : 
         'Unknown'
-      
-      const confidence = analysis.boxes && analysis.boxes.length > 0 ? 
-        analysis.boxes[0].confidence : 0.8
 
       const newItem: UploadedItem = {
         id: Date.now().toString(),
         name: file.name.replace(/\.[^/.]+$/, ''),
         category: category,
         imageUrl: imageUrl,
-        confidence: confidence
+        confidence: 1.0 // Always show as confident since we're not displaying the score
       }
 
       setUploadedItems(prev => [...prev, newItem])
@@ -61,14 +58,13 @@ export default function PhotoUpload() {
       // Fallback to mock data if API fails
       const categories = ['Shirt', 'Pants', 'Jacket', 'Dress', 'Shoes', 'Accessory']
       const randomCategory = categories[Math.floor(Math.random() * categories.length)]
-      const confidence = Math.random() * 0.3 + 0.7
 
       const newItem: UploadedItem = {
         id: Date.now().toString(),
         name: file.name.replace(/\.[^/.]+$/, ''),
         category: randomCategory,
         imageUrl: imageUrl,
-        confidence: confidence
+        confidence: 1.0 // Always show as confident since we're not displaying the score
       }
 
       setUploadedItems(prev => [...prev, newItem])
@@ -307,12 +303,6 @@ export default function PhotoUpload() {
                       <span className="text-sm text-slate-600 font-light">Category:</span>
                       <span className="px-3 py-1 bg-slate-100 text-slate-700 text-sm font-light rounded-full">
                         {item.category}
-                      </span>
-                    </div>
-                    <div className="flex items-center space-x-3 mt-2">
-                      <span className="text-sm text-slate-600 font-light">Confidence:</span>
-                      <span className="text-sm font-light text-slate-700">
-                        {Math.round(item.confidence * 100)}%
                       </span>
                     </div>
                   </div>
