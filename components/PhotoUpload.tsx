@@ -3,7 +3,7 @@
 import { useState, useCallback, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useDropzone } from 'react-dropzone'
-import { Upload, Camera, Sparkles, CheckCircle, AlertCircle, RefreshCw, X } from 'lucide-react'
+import { Upload, Camera, Sparkles, CheckCircle, Trash2, RefreshCw, X } from 'lucide-react'
 
 import { UploadedItem } from '../types'
 
@@ -286,7 +286,7 @@ export default function PhotoUpload() {
                       onClick={() => removeItem(item.id)}
                       className="text-slate-400 hover:text-slate-600 transition-all duration-200 p-2 rounded-lg hover:bg-slate-100"
                     >
-                      <AlertCircle className="w-5 h-5" />
+                      <Trash2 className="w-5 h-5" />
                     </button>
                   </div>
                 </motion.div>
