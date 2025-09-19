@@ -3,14 +3,18 @@ export type WardrobeCategory = "shirt" | "pants" | "jacket" | "dress" | "shoes" 
 const SYNONYMS: Record<WardrobeCategory, string[]> = {
   shirt: ["shirt","t-shirt","tee","top","blouse","sweater","cardigan","hoodie","polo","jersey","kurta","kurti"],
   pants: ["pants","trousers","jeans","denim","chinos","leggings","joggers","shorts","cargo pants"],
-  jacket: ["jacket","coat","blazer","parka","windbreaker","overcoat","trench coat","puffer"],
+  jacket: ["jacket","coat","blazer","parka","windbreaker","overcoat","trench coat","puffer","suit","tuxedo"],
   dress: ["dress","gown","skirt","saree","kurta set","sundress"],
   shoes: ["shoe","shoes","sneaker","sneakers","boot","boots","heel","heels","loafer","loafers","sandal","sandals","flip-flop","slipper","slippers"],
-  accessory: ["handbag","bag","backpack","belt","hat","cap","scarf","watch","glasses","sunglasses","tie","bow tie","wallet"],
+  accessory: ["handbag","bag","backpack","belt","hat","cap","scarf","watch","glasses","sunglasses","tie","bow tie","wallet","necktie","pocket square"],
 };
 
 const CATEGORY_PRIORITY: WardrobeCategory[] = ["shirt","jacket","pants","dress","shoes","accessory"];
 // ^ If scores tie or are close, prefer upper-body garments over shoes/accessories for single-item photos.
+
+// Heuristic words for better context detection
+const HEADSHOT_HINTS = ["portrait","headshot","face","smile","shoulder","profile"];
+const SUIT_HINTS = ["suit","blazer","tuxedo","tie","necktie","pocket square"];
 
 export function computeCategory(
   tags: { name: string; confidence: number }[] = [],
@@ -58,6 +62,31 @@ export function computeCategory(
   // 2) If we see a clear shirt/jacket token, lightly downweight shoes (single-item photos bias)
   const hasTop = hits.shirt.length > 0 || hits.jacket.length > 0;
   if (hasTop) scores.shoes *= 0.7;
+
+  // Enhanced heuristic detection
+  const hasHeadshot = tagTokens.some(t => HEADSHOT_HINTS.includes(t.token) && t.conf >= 0.5);
+  const hasSuit = tagTokens.concat(objTokens).some(t => SUIT_HINTS.includes(t.token) && t.conf >= 0.5);
+
+  // Boost tops when a suit is present
+  if (hasSuit) {
+    scores.jacket *= 1.35;
+    scores.shirt  *= 1.15;
+    // Suits rarely show shoes/pants clearly in headshots
+    scores.pants  *= 0.75;
+    scores.shoes  *= 0.7;
+  }
+
+  // Penalize lower-body for headshots
+  if (hasHeadshot) {
+    scores.pants *= 0.6;
+    scores.shoes *= 0.5;
+  }
+
+  // Extra guardrail: if there is NO pants/jeans/trousers object with conf >= 0.65,
+  // but we DO have shirt/jacket hits, knock pants down.
+  const hasPantsObject = objTokens.some(t => SYNONYMS.pants.includes(t.token) && t.conf >= 0.65);
+  const hasTopHits = hits.shirt.length > 0 || hits.jacket.length > 0;
+  if (!hasPantsObject && hasTopHits) scores.pants *= 0.6;
 
   // Pick best with a minimum threshold
   let best: WardrobeCategory | undefined = undefined;

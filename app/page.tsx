@@ -20,18 +20,18 @@ export default function Home() {
     <div className="min-h-screen">
       <Header />
       
-      <main className="container mx-auto px-4 py-8">
+      <main className="max-w-6xl mx-auto px-8 py-8">
         {/* Hero Section */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
-          <h1 className="text-6xl font-light tracking-tight bg-gradient-to-r from-slate-800 via-slate-700 to-slate-600 bg-clip-text text-transparent mb-6">
+          <h1 className="text-5xl font-light tracking-tight bg-gradient-to-r from-slate-800 via-slate-700 to-slate-600 bg-clip-text text-transparent mb-4">
             Your Smart Wardrobe
           </h1>
-          <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed font-light">
+          <p className="text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed font-light">
             Transform your closet into a sophisticated digital inventory with AI-powered clothing recognition. 
             Upload photos and let our intelligent system instantly categorize and organize your wardrobe.
           </p>
@@ -42,10 +42,10 @@ export default function Home() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="bg-white rounded-3xl shadow-2xl border border-slate-100 overflow-hidden mb-12"
+          className="bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden mb-8"
         >
-          <div className="p-8">
-            <h2 className="text-3xl font-light text-slate-800 mb-6 flex items-center">
+          <div className="p-6">
+            <h2 className="text-2xl font-light text-slate-800 mb-4 flex items-center">
               <Upload className="w-7 h-7 mr-4 text-slate-600" />
               Add New Items
             </h2>
@@ -60,10 +60,10 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="bg-white rounded-3xl shadow-2xl border border-slate-100 overflow-hidden mb-12"
+            className="bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden mb-8"
           >
-            <div className="p-8">
-              <h2 className="text-3xl font-light text-slate-800 mb-6 flex items-center">
+            <div className="p-6">
+              <h2 className="text-2xl font-light text-slate-800 mb-4 flex items-center">
                 <Sparkles className="w-7 h-7 mr-4 text-slate-600" />
                 AI Assistant
               </h2>
@@ -127,10 +127,10 @@ export default function Home() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
-          className="bg-white rounded-3xl shadow-2xl border border-slate-100 overflow-hidden mb-12"
+          className="bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden mb-8"
         >
-          <div className="p-8">
-            <h2 className="text-3xl font-light text-slate-800 mb-6 flex items-center">
+          <div className="p-6">
+            <h2 className="text-2xl font-light text-slate-800 mb-4 flex items-center">
               <Grid className="w-7 h-7 mr-4 text-slate-600" />
               My Wardrobe
             </h2>
@@ -147,30 +147,30 @@ export default function Home() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="grid md:grid-cols-3 gap-8 mb-12"
+          className="grid md:grid-cols-3 gap-6 mb-8"
         >
-          <div className="bg-white rounded-2xl p-8 shadow-xl border border-slate-100 hover:shadow-2xl transition-all duration-300">
-            <div className="w-16 h-16 bg-gradient-to-br from-slate-100 to-slate-200 rounded-2xl flex items-center justify-center mb-6">
-              <Camera className="w-8 h-8 text-slate-700" />
+          <div className="bg-white rounded-xl p-6 shadow-lg border border-slate-100 hover:shadow-xl transition-all duration-300">
+            <div className="w-12 h-12 bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl flex items-center justify-center mb-4">
+              <Camera className="w-6 h-6 text-slate-700" />
             </div>
-            <h3 className="text-xl font-light text-slate-800 mb-3">AI Recognition</h3>
-            <p className="text-slate-600 leading-relaxed">Instantly identify and categorize clothing items from photos with advanced computer vision technology</p>
+            <h3 className="text-lg font-light text-slate-800 mb-2">AI Recognition</h3>
+            <p className="text-slate-600 leading-relaxed text-sm">Instantly identify and categorize clothing items from photos with advanced computer vision technology</p>
           </div>
           
-          <div className="bg-white rounded-2xl p-8 shadow-xl border border-slate-100 hover:shadow-2xl transition-all duration-300">
-            <div className="w-16 h-16 bg-gradient-to-br from-slate-100 to-slate-200 rounded-2xl flex items-center justify-center mb-6">
-              <Grid className="w-8 h-8 text-slate-700" />
+          <div className="bg-white rounded-xl p-6 shadow-lg border border-slate-100 hover:shadow-xl transition-all duration-300">
+            <div className="w-12 h-12 bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl flex items-center justify-center mb-4">
+              <Grid className="w-6 h-6 text-slate-700" />
             </div>
-            <h3 className="text-xl font-light text-slate-800 mb-3">Smart Organization</h3>
-            <p className="text-slate-600 leading-relaxed">Automatically sort items into categories and collections with intelligent classification algorithms</p>
+            <h3 className="text-lg font-light text-slate-800 mb-2">Smart Organization</h3>
+            <p className="text-slate-600 leading-relaxed text-sm">Automatically sort items into categories and collections with intelligent classification algorithms</p>
           </div>
           
-          <div className="bg-white rounded-2xl p-8 shadow-xl border border-slate-100 hover:shadow-2xl transition-all duration-300">
-            <div className="w-16 h-16 bg-gradient-to-br from-slate-100 to-slate-200 rounded-2xl flex items-center justify-center mb-6">
-              <Search className="w-8 h-8 text-slate-700" />
+          <div className="bg-white rounded-xl p-6 shadow-lg border border-slate-100 hover:shadow-xl transition-all duration-300">
+            <div className="w-12 h-12 bg-gradient-to-br from-slate-100 to-slate-200 rounded-xl flex items-center justify-center mb-4">
+              <Search className="w-6 h-6 text-slate-700" />
             </div>
-            <h3 className="text-xl font-light text-slate-800 mb-3">Intelligent Search</h3>
-            <p className="text-slate-600 leading-relaxed">Find exactly what you're looking for in your digital wardrobe with semantic search capabilities</p>
+            <h3 className="text-lg font-light text-slate-800 mb-2">Intelligent Search</h3>
+            <p className="text-slate-600 leading-relaxed text-sm">Find exactly what you're looking for in your digital wardrobe with semantic search capabilities</p>
           </div>
         </motion.div>
 
@@ -180,14 +180,14 @@ export default function Home() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.7 }}
-          className="bg-white rounded-3xl shadow-2xl border border-slate-100 overflow-hidden"
+          className="bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden"
         >
-          <div className="p-8 text-center">
+          <div className="p-6 text-center">
             <h2 className="text-3xl font-light text-slate-800 mb-6">Get In Touch</h2>
             <p className="text-slate-600 mb-8 max-w-2xl mx-auto leading-relaxed">
               Have questions about Dresser or want to collaborate? I'd love to hear from you.
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-8">
               <a 
                 href="mailto:deepshahane@gmail.com"
                 className="flex items-center space-x-3 bg-slate-800 text-white px-6 py-3 rounded-xl hover:bg-slate-700 transition-all duration-200 font-light"
@@ -209,6 +209,13 @@ export default function Home() {
                 </svg>
                 <span>LinkedIn Profile</span>
               </a>
+            </div>
+            
+            {/* Copyright */}
+            <div className="border-t border-slate-200 pt-6">
+              <p className="text-sm text-slate-500 text-center">
+                © 2024 Dresser. All rights reserved. Built with Next.js, TypeScript, and AI-powered styling.
+              </p>
             </div>
           </div>
         </motion.div>

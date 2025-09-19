@@ -19,8 +19,8 @@ export default function Header() {
   }
 
   return (
-    <header className="bg-white/90 backdrop-blur-lg border-b border-slate-200 sticky top-0 z-50">
-      <div className="container mx-auto px-6">
+    <header className="bg-white/60 backdrop-blur-2xl border-b border-white/30 sticky top-0 z-50 shadow-lg shadow-black/10">
+      <div className="max-w-7xl mx-auto px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <motion.div 
@@ -29,35 +29,35 @@ export default function Header() {
             transition={{ duration: 0.5 }}
             className="flex items-center space-x-3"
           >
-            <div className="w-10 h-10 bg-gradient-to-br from-slate-700 to-slate-900 rounded-xl flex items-center justify-center shadow-lg">
+            <div className="w-10 h-10 bg-gradient-to-br from-slate-800 via-slate-700 to-slate-900 rounded-xl flex items-center justify-center shadow-lg ring-1 ring-white/20">
               <Sparkles className="w-6 h-6 text-white" />
             </div>
-            <span className="text-2xl font-light bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent tracking-tight">
+            <span className="text-2xl font-light bg-gradient-to-r from-slate-900 via-slate-800 to-slate-700 bg-clip-text text-transparent tracking-tight">
               Dresser
             </span>
           </motion.div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-10">
+          <nav className="hidden md:flex items-center space-x-2">
             <button 
               onClick={() => scrollToSection('ai-assistant')}
-              className="flex items-center space-x-2 text-slate-600 hover:text-slate-800 transition-all duration-200 font-light"
+              className="flex items-center space-x-3 px-6 py-3 text-slate-700 hover:text-slate-900 hover:bg-white/50 rounded-xl transition-all duration-300 font-light group backdrop-blur-sm"
             >
-              <Bot className="w-5 h-5" />
+              <Bot className="w-5 h-5 group-hover:scale-110 transition-transform duration-200" />
               <span>AI Assistant</span>
             </button>
             <button 
               onClick={() => scrollToSection('my-wardrobe')}
-              className="flex items-center space-x-2 text-slate-600 hover:text-slate-800 transition-all duration-200 font-light"
+              className="flex items-center space-x-3 px-6 py-3 text-slate-700 hover:text-slate-900 hover:bg-white/50 rounded-xl transition-all duration-300 font-light group backdrop-blur-sm"
             >
-              <Grid3X3 className="w-5 h-5" />
+              <Grid3X3 className="w-5 h-5 group-hover:scale-110 transition-transform duration-200" />
               <span>My Wardrobe</span>
             </button>
             <button 
               onClick={() => scrollToSection('contact')}
-              className="flex items-center space-x-2 text-slate-600 hover:text-slate-800 transition-all duration-200 font-light"
+              className="flex items-center space-x-3 px-6 py-3 text-slate-700 hover:text-slate-900 hover:bg-white/50 rounded-xl transition-all duration-300 font-light group backdrop-blur-sm"
             >
-              <Mail className="w-5 h-5" />
+              <Mail className="w-5 h-5 group-hover:scale-110 transition-transform duration-200" />
               <span>Contact</span>
             </button>
           </nav>
@@ -65,12 +65,12 @@ export default function Header() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-3 rounded-xl hover:bg-slate-100 transition-all duration-200"
+            className="md:hidden p-3 rounded-xl hover:bg-white/50 transition-all duration-300 group backdrop-blur-sm"
           >
             {isMobileMenuOpen ? (
-              <X className="w-6 h-6 text-slate-600" />
+              <X className="w-6 h-6 text-slate-700 group-hover:scale-110 transition-transform duration-200" />
             ) : (
-              <Menu className="w-6 h-6 text-slate-600" />
+              <Menu className="w-6 h-6 text-slate-700 group-hover:scale-110 transition-transform duration-200" />
             )}
           </button>
         </div>
@@ -82,28 +82,28 @@ export default function Header() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden border-t border-slate-200 py-6"
+            className="md:hidden border-t border-white/20 py-6"
           >
-            <nav className="flex flex-col space-y-6">
+            <nav className="flex flex-col space-y-4">
               <button 
                 onClick={() => scrollToSection('ai-assistant')}
-                className="flex items-center space-x-3 text-slate-600 hover:text-slate-800 transition-all duration-200 text-left font-light"
+                className="flex items-center space-x-4 px-4 py-3 text-slate-700 hover:text-slate-900 hover:bg-white/50 rounded-xl transition-all duration-300 text-left font-light group backdrop-blur-sm"
               >
-                <Bot className="w-5 h-5" />
+                <Bot className="w-5 h-5 group-hover:scale-110 transition-transform duration-200" />
                 <span>AI Assistant</span>
               </button>
               <button 
                 onClick={() => scrollToSection('my-wardrobe')}
-                className="flex items-center space-x-3 text-slate-600 hover:text-slate-800 transition-all duration-200 text-left font-light"
+                className="flex items-center space-x-4 px-4 py-3 text-slate-700 hover:text-slate-900 hover:bg-white/50 rounded-xl transition-all duration-300 text-left font-light group backdrop-blur-sm"
               >
-                <Grid3X3 className="w-5 h-5" />
+                <Grid3X3 className="w-5 h-5 group-hover:scale-110 transition-transform duration-200" />
                 <span>My Wardrobe</span>
               </button>
               <button 
                 onClick={() => scrollToSection('contact')}
-                className="flex items-center space-x-3 text-slate-600 hover:text-slate-800 transition-all duration-200 text-left font-light"
+                className="flex items-center space-x-4 px-4 py-3 text-slate-700 hover:text-slate-900 hover:bg-white/50 rounded-xl transition-all duration-300 text-left font-light group backdrop-blur-sm"
               >
-                <Mail className="w-5 h-5" />
+                <Mail className="w-5 h-5 group-hover:scale-110 transition-transform duration-200" />
                 <span>Contact</span>
               </button>
             </nav>
