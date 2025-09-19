@@ -29,6 +29,6 @@ export async function getDatabase(config?: DatabaseConfig): Promise<DatabaseAdap
   return dbInstance
 }
 
-export { DatabaseAdapter } from './interface'
+export type { DatabaseAdapter } from './interface'
 export { LocalFallbackAdapter } from './local-fallback'
 export * from './types'

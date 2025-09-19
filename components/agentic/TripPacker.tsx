@@ -44,7 +44,11 @@ export default function TripPacker({ userId }: TripPackerProps) {
     destination: '',
     startDate: '',
     endDate: '',
-    activities: []
+    activities: [],
+    weather: {
+      temperature: 20,
+      condition: 'sunny'
+    }
   })
   const [packingList, setPackingList] = useState<PackingList | null>(null)
 

@@ -90,7 +90,7 @@ export default function AskDresser({ userId }: AskDresserProps) {
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
             placeholder="Ask Dresser: 'What should I wear for a business meeting tomorrow?'"
-            className="w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 placeholder-gray-500"
             disabled={isLoading}
           />
           <div className="absolute right-3 top-1/2 transform -translate-y-1/2">

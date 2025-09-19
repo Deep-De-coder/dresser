@@ -1,5 +1,7 @@
 import { Item, Outfit, Preferences, Feedback, QueryFilters, SimilarityQuery } from './types'
 
+export type { Item, Outfit, Preferences, Feedback, QueryFilters, SimilarityQuery }
+
 export interface DatabaseAdapter {
   // Items
   createItem(item: Omit<Item, 'id' | 'createdAt'>): Promise<Item>

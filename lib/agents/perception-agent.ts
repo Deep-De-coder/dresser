@@ -183,4 +183,16 @@ export class PerceptionAgentWrapper extends BaseAgent {
   }> {
     return this.perceptionAgent.processUpload(file, userId)
   }
+
+  getClientCapabilities(): {
+    onDeviceTagging: boolean
+    embeddingGeneration: boolean
+    duplicateDetection: boolean
+  } {
+    return {
+      onDeviceTagging: true,
+      embeddingGeneration: true,
+      duplicateDetection: true
+    }
+  }
 }
