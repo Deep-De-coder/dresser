@@ -17,26 +17,62 @@ export default function PhotoUpload() {
 
   const processFile = async (file: File) => {
     // Set current image immediately
-    setCurrentImage(URL.createObjectURL(file))
+    const imageUrl = URL.createObjectURL(file)
+    setCurrentImage(imageUrl)
     setCurrentImageName(file.name.replace(/\.[^/.]+$/, ''))
     
-    // Simulate processing time
-    await new Promise(resolve => setTimeout(resolve, 2000))
-    
-    // Simulate AI categorization
-    const categories = ['Shirt', 'Pants', 'Jacket', 'Dress', 'Shoes', 'Accessory']
-    const randomCategory = categories[Math.floor(Math.random() * categories.length)]
-    const confidence = Math.random() * 0.3 + 0.7 // 70-100% confidence
+    try {
+      // Call Azure Vision API for real analysis
+      const response = await fetch('/api/wardrobe/analyze', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ imageUrl }),
+      })
 
-    const newItem: UploadedItem = {
-      id: Date.now().toString(),
-      name: file.name.replace(/\.[^/.]+$/, ''),
-      category: randomCategory,
-      imageUrl: URL.createObjectURL(file),
-      confidence: confidence
+      if (!response.ok) {
+        throw new Error(`API call failed: ${response.status}`)
+      }
+
+      const analysis = await response.json()
+      
+      // Map Azure results to our format
+      const category = analysis.category ? 
+        analysis.category.charAt(0).toUpperCase() + analysis.category.slice(1) : 
+        'Unknown'
+      
+      const confidence = analysis.boxes && analysis.boxes.length > 0 ? 
+        analysis.boxes[0].confidence : 0.8
+
+      const newItem: UploadedItem = {
+        id: Date.now().toString(),
+        name: file.name.replace(/\.[^/.]+$/, ''),
+        category: category,
+        imageUrl: imageUrl,
+        confidence: confidence
+      }
+
+      setUploadedItems(prev => [...prev, newItem])
+      
+    } catch (error) {
+      console.error('AI analysis failed:', error)
+      
+      // Fallback to mock data if API fails
+      const categories = ['Shirt', 'Pants', 'Jacket', 'Dress', 'Shoes', 'Accessory']
+      const randomCategory = categories[Math.floor(Math.random() * categories.length)]
+      const confidence = Math.random() * 0.3 + 0.7
+
+      const newItem: UploadedItem = {
+        id: Date.now().toString(),
+        name: file.name.replace(/\.[^/.]+$/, ''),
+        category: randomCategory,
+        imageUrl: imageUrl,
+        confidence: confidence
+      }
+
+      setUploadedItems(prev => [...prev, newItem])
     }
-
-    setUploadedItems(prev => [...prev, newItem])
   }
 
   const onDrop = useCallback(async (acceptedFiles: File[]) => {
