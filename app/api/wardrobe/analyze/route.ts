@@ -8,6 +8,7 @@ type WardrobeAttributes = {
   category?: string;
   colors?: { name?: string; hex?: string }[];
   boxes?: { label: string; box: [number, number, number, number]; confidence: number }[];
+  debug?: any;
   raw?: any;
 };
 

@@ -39,10 +39,10 @@ export class FeedbackProcessor {
 
   private extractInsights(reason: string, decision: string, items?: any[]): any {
     const insights = {
-      colorPreferences: [],
-      formalityPreferences: [],
-      comfortConstraints: [],
-      stylePreferences: []
+      colorPreferences: [] as any[],
+      formalityPreferences: [] as any[],
+      comfortConstraints: [] as any[],
+      stylePreferences: [] as any[]
     }
 
     const reasonLower = reason.toLowerCase()
@@ -297,7 +297,7 @@ export class FeedbackProcessor {
     const rules = await this.getLearningRules(userId)
     
     const totalFeedback = feedback.length
-    const accepted = feedback.filter(f => f.decision === 'accepted').length
+    const accepted = feedback.filter((f: any) => f.decision === 'accepted').length
     const acceptanceRate = totalFeedback > 0 ? (accepted / totalFeedback) * 100 : 0
 
     return {

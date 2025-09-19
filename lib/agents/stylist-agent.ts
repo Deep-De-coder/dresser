@@ -66,7 +66,7 @@ export class StylistAgent extends BaseAgent {
             
             await this.executeStep(execution, step)
             
-            if (step.status === 'completed') {
+            if ((step as any).status === 'completed') {
               completedSteps.add(step.id)
               hasProgress = true
             }

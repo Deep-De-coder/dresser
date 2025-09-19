@@ -181,13 +181,16 @@ export async function POST(request: NextRequest) {
       const response = shapeResponse(rawResponse, items);
       
       // Add metadata
-      response.meta = {
-        provider: process.env.AI_PROVIDER || "ollama",
-        model: process.env.LLM_MODEL || "phi3:instruct",
-        latencyMs: Date.now() - startTime
+      const responseWithMeta = {
+        ...response,
+        meta: {
+          provider: process.env.AI_PROVIDER || "ollama",
+          model: process.env.LLM_MODEL || "phi3:instruct",
+          latencyMs: Date.now() - startTime
+        }
       };
 
-      return NextResponse.json(response);
+      return NextResponse.json(responseWithMeta);
         } catch (providerError: any) {
           console.log("Provider error caught:", providerError);
           // If Ollama is not running, provide intelligent fallback responses

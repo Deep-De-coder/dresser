@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
     })
 
     // Update user preferences based on feedback
-    await this.updatePreferencesFromFeedback(userId, decision, reason, db)
+    // TODO: Implement preference learning from feedback
 
     return NextResponse.json({
       success: true,
@@ -74,7 +74,10 @@ export async function GET(request: NextRequest) {
     const feedback = await db.getUserFeedback(userId, limit)
 
     // Calculate feedback statistics
-    const stats = this.calculateFeedbackStats(feedback)
+    const stats = {
+      totalFeedback: feedback.length,
+      acceptanceRate: feedback.filter(f => f.decision === 'accepted').length / feedback.length
+    }
 
     return NextResponse.json({
       success: true,

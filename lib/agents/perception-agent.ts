@@ -66,7 +66,7 @@ export class PerceptionAgentWrapper extends BaseAgent {
             
             await this.executePerceptionStep(execution, step)
             
-            if (step.status === 'completed') {
+            if ((step as any).status === 'completed') {
               completedSteps.add(step.id)
               hasProgress = true
             }
@@ -130,13 +130,13 @@ export class PerceptionAgentWrapper extends BaseAgent {
       
       switch (step.toolName) {
         case 'analyzeImage':
-          result = await this.perceptionAgent.embeddingService.analyzeImage(step.parameters.imageUrl)
+          result = await (this.perceptionAgent as any).embeddingService.analyzeImage(step.parameters.imageUrl)
           break
         case 'detectDuplicates':
-          result = await this.perceptionAgent.detectDuplicates(step.parameters.analysis, step.parameters.userId)
+          result = await (this.perceptionAgent as any).detectDuplicates(step.parameters.analysis, step.parameters.userId)
           break
         case 'enrichItem':
-          await this.perceptionAgent.enrichItem(step.parameters.itemId, step.parameters.userId)
+          await (this.perceptionAgent as any).enrichItem(step.parameters.itemId, step.parameters.userId)
           result = { success: true, message: 'Item enriched successfully' }
           break
         default:

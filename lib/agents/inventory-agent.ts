@@ -58,7 +58,7 @@ export class InventoryAgent extends BaseAgent {
             
             await this.executeInventoryStep(execution, step)
             
-            if (step.status === 'completed') {
+            if ((step as any).status === 'completed') {
               completedSteps.add(step.id)
               hasProgress = true
             }
@@ -223,7 +223,7 @@ export class InventoryAgent extends BaseAgent {
   }
 
   private analyzeWardrobeGaps(items: any[], capsuleGoal: string): any[] {
-    const gaps = []
+    const gaps: any[] = []
     const categories = ['shirt', 'pants', 'jacket', 'dress', 'shoes', 'accessory']
     
     categories.forEach(category => {

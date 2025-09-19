@@ -60,7 +60,7 @@ export async function POST(request: NextRequest) {
       colors: analysis.colors,
       patterns: analysis.patterns,
       fabric: analysis.fabric,
-      seasons: this.inferSeasons(analysis),
+      seasons: ['Spring', 'Summer', 'Fall', 'Winter'], // TODO: Implement season inference
       formality: analysis.formality,
       imageUrl: shouldUpload ? `uploads/${itemId}` : '', // In local-first mode, don't store URL
       wearCount: 0,

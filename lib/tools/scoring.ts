@@ -176,11 +176,11 @@ export class ScoringTool {
 
   private generateRationale(breakdown: any, overallScore: number, goal: string, weather: WeatherData): string {
     const strengths = Object.entries(breakdown)
-      .filter(([_, score]) => score > 0.7)
+      .filter(([_, score]) => (score as number) > 0.7)
       .map(([key, _]) => key)
     
     const weaknesses = Object.entries(breakdown)
-      .filter(([_, score]) => score < 0.5)
+      .filter(([_, score]) => (score as number) < 0.5)
       .map(([key, _]) => key)
 
     let rationale = `This outfit scores ${Math.round(overallScore * 100)}% for your ${goal} goal. `

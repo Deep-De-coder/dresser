@@ -1,4 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { getDatabase } from '@/lib/db'
+import { AgentOrchestrator } from '@/lib/agents'
+
+const orchestrator = new AgentOrchestrator()
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
