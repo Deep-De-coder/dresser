@@ -53,37 +53,6 @@ export default function Home() {
           </div>
         </motion.div>
 
-        {/* Feature Cards */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="grid md:grid-cols-3 gap-8 mb-12"
-        >
-          <div className="bg-white rounded-2xl p-8 shadow-xl border border-slate-100 hover:shadow-2xl transition-all duration-300">
-            <div className="w-16 h-16 bg-gradient-to-br from-slate-100 to-slate-200 rounded-2xl flex items-center justify-center mb-6">
-              <Camera className="w-8 h-8 text-slate-700" />
-            </div>
-            <h3 className="text-xl font-light text-slate-800 mb-3">AI Recognition</h3>
-            <p className="text-slate-600 leading-relaxed">Instantly identify and categorize clothing items from photos with advanced computer vision technology</p>
-          </div>
-          
-          <div className="bg-white rounded-2xl p-8 shadow-xl border border-slate-100 hover:shadow-2xl transition-all duration-300">
-            <div className="w-16 h-16 bg-gradient-to-br from-slate-100 to-slate-200 rounded-2xl flex items-center justify-center mb-6">
-              <Grid className="w-8 h-8 text-slate-700" />
-            </div>
-            <h3 className="text-xl font-light text-slate-800 mb-3">Smart Organization</h3>
-            <p className="text-slate-600 leading-relaxed">Automatically sort items into categories and collections with intelligent classification algorithms</p>
-          </div>
-          
-          <div className="bg-white rounded-2xl p-8 shadow-xl border border-slate-100 hover:shadow-2xl transition-all duration-300">
-            <div className="w-16 h-16 bg-gradient-to-br from-slate-100 to-slate-200 rounded-2xl flex items-center justify-center mb-6">
-              <Search className="w-8 h-8 text-slate-700" />
-            </div>
-            <h3 className="text-xl font-light text-slate-800 mb-3">Intelligent Search</h3>
-            <p className="text-slate-600 leading-relaxed">Find exactly what you're looking for in your digital wardrobe with semantic search capabilities</p>
-          </div>
-        </motion.div>
 
           {/* AI Assistant Section */}
           <motion.div 
@@ -152,13 +121,13 @@ export default function Home() {
           </div>
         </motion.div>
 
-        {/* Wardrobe Grid and Search - Moved to Bottom */}
+        {/* Wardrobe Grid and Search */}
         <motion.div 
           id="my-wardrobe"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
-          className="bg-white rounded-3xl shadow-2xl border border-slate-100 overflow-hidden"
+          className="bg-white rounded-3xl shadow-2xl border border-slate-100 overflow-hidden mb-12"
         >
           <div className="p-8">
             <h2 className="text-3xl font-light text-slate-800 mb-6 flex items-center">
@@ -170,6 +139,77 @@ export default function Home() {
               onCategoryChange={setSelectedCategory}
             />
             <WardrobeGrid category={selectedCategory} />
+          </div>
+        </motion.div>
+
+        {/* Feature Cards - Moved to Bottom */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="grid md:grid-cols-3 gap-8 mb-12"
+        >
+          <div className="bg-white rounded-2xl p-8 shadow-xl border border-slate-100 hover:shadow-2xl transition-all duration-300">
+            <div className="w-16 h-16 bg-gradient-to-br from-slate-100 to-slate-200 rounded-2xl flex items-center justify-center mb-6">
+              <Camera className="w-8 h-8 text-slate-700" />
+            </div>
+            <h3 className="text-xl font-light text-slate-800 mb-3">AI Recognition</h3>
+            <p className="text-slate-600 leading-relaxed">Instantly identify and categorize clothing items from photos with advanced computer vision technology</p>
+          </div>
+          
+          <div className="bg-white rounded-2xl p-8 shadow-xl border border-slate-100 hover:shadow-2xl transition-all duration-300">
+            <div className="w-16 h-16 bg-gradient-to-br from-slate-100 to-slate-200 rounded-2xl flex items-center justify-center mb-6">
+              <Grid className="w-8 h-8 text-slate-700" />
+            </div>
+            <h3 className="text-xl font-light text-slate-800 mb-3">Smart Organization</h3>
+            <p className="text-slate-600 leading-relaxed">Automatically sort items into categories and collections with intelligent classification algorithms</p>
+          </div>
+          
+          <div className="bg-white rounded-2xl p-8 shadow-xl border border-slate-100 hover:shadow-2xl transition-all duration-300">
+            <div className="w-16 h-16 bg-gradient-to-br from-slate-100 to-slate-200 rounded-2xl flex items-center justify-center mb-6">
+              <Search className="w-8 h-8 text-slate-700" />
+            </div>
+            <h3 className="text-xl font-light text-slate-800 mb-3">Intelligent Search</h3>
+            <p className="text-slate-600 leading-relaxed">Find exactly what you're looking for in your digital wardrobe with semantic search capabilities</p>
+          </div>
+        </motion.div>
+
+        {/* Contact Section */}
+        <motion.div 
+          id="contact"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.7 }}
+          className="bg-white rounded-3xl shadow-2xl border border-slate-100 overflow-hidden"
+        >
+          <div className="p-8 text-center">
+            <h2 className="text-3xl font-light text-slate-800 mb-6">Get In Touch</h2>
+            <p className="text-slate-600 mb-8 max-w-2xl mx-auto leading-relaxed">
+              Have questions about Dresser or want to collaborate? I'd love to hear from you.
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+              <a 
+                href="mailto:deepshahane@gmail.com"
+                className="flex items-center space-x-3 bg-slate-800 text-white px-6 py-3 rounded-xl hover:bg-slate-700 transition-all duration-200 font-light"
+              >
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                  <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                </svg>
+                <span>deepshahane@gmail.com</span>
+              </a>
+              <a 
+                href="https://linkedin.com/in/deepshahane"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center space-x-3 bg-blue-600 text-white px-6 py-3 rounded-xl hover:bg-blue-700 transition-all duration-200 font-light"
+              >
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M16.338 16.338H13.67V12.16c0-.995-.017-2.277-1.387-2.277-1.39 0-1.601 1.086-1.601 2.207v4.248H8.014v-8.59h2.559v1.174h.037c.356-.675 1.227-1.387 2.526-1.387 2.703 0 3.203 1.778 3.203 4.092v4.711zM5.005 6.575a1.548 1.548 0 11-.003-3.096 1.548 1.548 0 01.003 3.096zm-1.337 9.763H6.34v-8.59H3.667v8.59zM17.668 1H2.328C1.595 1 1 1.581 1 2.298v15.403C1 18.418 1.595 19 2.328 19h15.34c.734 0 1.332-.582 1.332-1.299V2.298C19 1.581 18.402 1 17.668 1z" clipRule="evenodd" />
+                </svg>
+                <span>LinkedIn Profile</span>
+              </a>
+            </div>
           </div>
         </motion.div>
       </main>

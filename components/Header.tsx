@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Sparkles, Menu, X, Bot, Grid3X3 } from 'lucide-react'
+import { Sparkles, Menu, X, Bot, Grid3X3, Mail } from 'lucide-react'
 import { useState } from 'react'
 
 export default function Header() {
@@ -53,6 +53,13 @@ export default function Header() {
               <Grid3X3 className="w-5 h-5" />
               <span>My Wardrobe</span>
             </button>
+            <button 
+              onClick={() => scrollToSection('contact')}
+              className="flex items-center space-x-2 text-slate-600 hover:text-slate-800 transition-all duration-200 font-light"
+            >
+              <Mail className="w-5 h-5" />
+              <span>Contact</span>
+            </button>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -91,6 +98,13 @@ export default function Header() {
               >
                 <Grid3X3 className="w-5 h-5" />
                 <span>My Wardrobe</span>
+              </button>
+              <button 
+                onClick={() => scrollToSection('contact')}
+                className="flex items-center space-x-3 text-slate-600 hover:text-slate-800 transition-all duration-200 text-left font-light"
+              >
+                <Mail className="w-5 h-5" />
+                <span>Contact</span>
               </button>
             </nav>
           </motion.div>
