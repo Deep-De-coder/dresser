@@ -160,10 +160,10 @@ export default function PhotoUpload() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white rounded-2xl border border-slate-200 p-6 shadow-lg"
+          className="bg-white rounded-2xl border border-slate-200 p-4 sm:p-6 shadow-lg"
         >
           <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-medium text-slate-800">Current Image</h3>
+            <h3 className="text-base sm:text-lg font-medium text-slate-800">Current Image</h3>
             <button
               onClick={clearCurrentImage}
               className="text-slate-400 hover:text-slate-600 transition-all duration-200 p-1.5 rounded-lg hover:bg-slate-100"
@@ -172,8 +172,8 @@ export default function PhotoUpload() {
             </button>
           </div>
           
-          <div className="flex items-start space-x-4">
-            <div className="relative w-24 h-24 flex-shrink-0">
+          <div className="flex flex-col sm:flex-row sm:items-start space-y-4 sm:space-y-0 sm:space-x-4">
+            <div className="relative w-20 h-20 sm:w-24 sm:h-24 flex-shrink-0 mx-auto sm:mx-0">
               <Image
                 src={currentImage}
                 alt={currentImageName}
@@ -187,17 +187,17 @@ export default function PhotoUpload() {
               )}
             </div>
             
-            <div className="flex-1 min-w-0">
+            <div className="flex-1 min-w-0 text-center sm:text-left">
               <div className="mb-3">
-                <p className="text-sm text-slate-500 mb-1">Generated</p>
-                <p className="text-sm text-slate-500 mb-1">Image</p>
-                <p className="text-sm text-slate-500">September 17, 2025 - 3:20PM</p>
+                <p className="text-xs sm:text-sm text-slate-500 mb-1">Generated</p>
+                <p className="text-xs sm:text-sm text-slate-500 mb-1">Image</p>
+                <p className="text-xs sm:text-sm text-slate-500">September 17, 2025 - 3:20PM</p>
               </div>
               
               <button
                 onClick={handleReplaceImage}
                 disabled={isProcessing}
-                className="flex items-center space-x-2 px-4 py-2 bg-slate-700 text-white rounded-lg hover:bg-slate-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 text-sm font-medium"
+                className="flex items-center justify-center space-x-2 px-4 py-2 bg-slate-700 text-white rounded-lg hover:bg-slate-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 text-sm font-medium w-full sm:w-auto"
               >
                 <RefreshCw className="w-4 h-4" />
                 <span>Replace Image</span>
@@ -215,7 +215,7 @@ export default function PhotoUpload() {
       {!currentImage && (
         <div
           {...getRootProps()}
-          className={`border-2 border-dashed rounded-2xl p-12 text-center transition-all duration-300 cursor-pointer ${
+          className={`border-2 border-dashed rounded-2xl p-6 sm:p-12 text-center transition-all duration-300 cursor-pointer ${
             isDragActive
               ? 'border-slate-400 bg-slate-50'
               : 'border-slate-300 hover:border-slate-400 hover:bg-slate-50'
@@ -229,23 +229,23 @@ export default function PhotoUpload() {
             transition={{ duration: 0.3 }}
           >
             {isDragActive ? (
-              <div className="space-y-6">
-                <Upload className="w-16 h-16 text-slate-600 mx-auto" />
-                <p className="text-xl font-light text-slate-700">Drop your photo here</p>
+              <div className="space-y-4 sm:space-y-6">
+                <Upload className="w-12 h-12 sm:w-16 sm:h-16 text-slate-600 mx-auto" />
+                <p className="text-lg sm:text-xl font-light text-slate-700">Drop your photo here</p>
               </div>
             ) : (
-              <div className="space-y-6">
-                <div className="w-20 h-20 bg-gradient-to-br from-slate-600 to-slate-800 rounded-2xl flex items-center justify-center mx-auto shadow-lg">
-                  <Camera className="w-10 h-10 text-white" />
+              <div className="space-y-4 sm:space-y-6">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-slate-600 to-slate-800 rounded-2xl flex items-center justify-center mx-auto shadow-lg">
+                  <Camera className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
                 </div>
                 <div>
-                  <p className="text-xl font-light text-slate-800 mb-3">
+                  <p className="text-lg sm:text-xl font-light text-slate-800 mb-2 sm:mb-3">
                     Upload your clothing photo
                   </p>
-                  <p className="text-slate-600 mb-6 leading-relaxed">
+                  <p className="text-sm sm:text-base text-slate-600 mb-4 sm:mb-6 leading-relaxed">
                     Drag and drop a photo here, or click to select a file
                   </p>
-                  <p className="text-sm text-slate-500 font-light">
+                  <p className="text-xs sm:text-sm text-slate-500 font-light">
                     Supports JPEG, PNG, and WebP formats
                   </p>
                 </div>
@@ -262,15 +262,15 @@ export default function PhotoUpload() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="bg-slate-50 rounded-2xl p-6 border border-slate-200"
+            className="bg-slate-50 rounded-2xl p-4 sm:p-6 border border-slate-200"
           >
-            <div className="flex items-center space-x-4">
-              <Sparkles className="w-6 h-6 text-slate-600 animate-pulse" />
+            <div className="flex items-center space-x-3 sm:space-x-4">
+              <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 text-slate-600 animate-pulse" />
               <div className="flex-1">
                 <p className="text-sm font-light text-slate-800">Processing with AI...</p>
-                <div className="w-full bg-slate-200 rounded-full h-3 mt-3">
+                <div className="w-full bg-slate-200 rounded-full h-2 sm:h-3 mt-2 sm:mt-3">
                   <div 
-                    className="bg-slate-600 h-3 rounded-full transition-all duration-300"
+                    className="bg-slate-600 h-2 sm:h-3 rounded-full transition-all duration-300"
                     style={{ width: `${processingProgress}%` }}
                   />
                 </div>
@@ -286,19 +286,19 @@ export default function PhotoUpload() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="space-y-6"
+            className="space-y-4 sm:space-y-6"
           >
-            <h3 className="text-xl font-light text-slate-800">Processed Items</h3>
-            <div className="grid gap-6">
+            <h3 className="text-lg sm:text-xl font-light text-slate-800">Processed Items</h3>
+            <div className="grid gap-4 sm:gap-6">
               {uploadedItems.map((item, index) => (
                 <motion.div
                   key={item.id}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
-                  className="bg-white rounded-2xl border border-slate-200 p-6 flex items-center space-x-6 shadow-lg"
+                  className="bg-white rounded-2xl border border-slate-200 p-4 sm:p-6 flex flex-col sm:flex-row sm:items-center space-y-3 sm:space-y-0 sm:space-x-6 shadow-lg"
                 >
-                  <div className="relative w-20 h-20">
+                  <div className="relative w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0 mx-auto sm:mx-0">
                     <Image
                       src={item.imageUrl}
                       alt={item.name}
@@ -306,22 +306,22 @@ export default function PhotoUpload() {
                       className="object-cover rounded-xl border border-slate-200"
                     />
                   </div>
-                  <div className="flex-1">
-                    <h4 className="font-light text-slate-800 text-lg mb-2">{item.name}</h4>
-                    <div className="flex items-center space-x-3 mt-2">
-                      <span className="text-sm text-slate-600 font-light">Category:</span>
-                      <span className="px-3 py-1 bg-slate-100 text-slate-700 text-sm font-light rounded-full">
+                  <div className="flex-1 text-center sm:text-left">
+                    <h4 className="font-light text-slate-800 text-base sm:text-lg mb-2">{item.name}</h4>
+                    <div className="flex items-center justify-center sm:justify-start space-x-3 mt-2">
+                      <span className="text-xs sm:text-sm text-slate-600 font-light">Category:</span>
+                      <span className="px-2 sm:px-3 py-1 bg-slate-100 text-slate-700 text-xs sm:text-sm font-light rounded-full">
                         {item.category}
                       </span>
                     </div>
                   </div>
-                  <div className="flex items-center space-x-3">
-                    <CheckCircle className="w-6 h-6 text-slate-600" />
+                  <div className="flex items-center justify-center sm:justify-end space-x-3">
+                    <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6 text-slate-600" />
                     <button
                       onClick={() => removeItem(item.id)}
                       className="text-slate-400 hover:text-slate-600 transition-all duration-200 p-2 rounded-lg hover:bg-slate-100"
                     >
-                      <Trash2 className="w-5 h-5" />
+                      <Trash2 className="w-4 h-4 sm:w-5 sm:h-5" />
                     </button>
                   </div>
                 </motion.div>
