@@ -5,7 +5,7 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Dresser - Smart Wardrobe Organizer',
+  title: 'Dresser',
   description: 'A smart wardrobe organizer that helps users keep track of their clothing with AI',
   keywords: ['wardrobe', 'clothing', 'AI', 'organization', 'fashion'],
   authors: [{ name: 'Hackathon Team' }],
