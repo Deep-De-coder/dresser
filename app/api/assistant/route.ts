@@ -10,6 +10,7 @@ export const dynamic = "force-dynamic";
 
 
 export async function POST(req: NextRequest) {
+  const startTime = Date.now();
   try {
     const { query, weather, items, preferences } = await req.json();
 
@@ -45,7 +46,15 @@ export async function POST(req: NextRequest) {
 
     const data = await r.json();
     const reply = data?.message?.content || data?.response || "Sorry, I couldn't generate a response.";
-    return NextResponse.json({ reply });
+    
+    // Add meta information for the frontend
+    const meta = {
+      provider: "ollama",
+      model: MODEL,
+      latencyMs: Date.now() - startTime
+    };
+    
+    return NextResponse.json({ reply, meta });
   } catch (e:any) {
     return NextResponse.json({ error: e?.name === "AbortError" ? "timeout" : (e?.message || "server_error") },
                               { status: e?.name === "AbortError" ? 504 : 500 });

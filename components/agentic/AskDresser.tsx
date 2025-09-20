@@ -224,7 +224,11 @@ export default function AskDresser({ userId }: AskDresserProps) {
             {/* Feedback */}
             <div className="flex items-center justify-between">
               <div className="text-xs text-slate-500">
-                Powered by {response.meta.provider} ({response.meta.model}) • {response.meta.latencyMs}ms
+                {response.meta ? (
+                  <>Powered by {response.meta.provider} ({response.meta.model}) • {response.meta.latencyMs}ms</>
+                ) : (
+                  <>Powered by AI Assistant</>
+                )}
               </div>
               <div className="flex items-center space-x-2">
                 <button
