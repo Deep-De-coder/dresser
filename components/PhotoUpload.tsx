@@ -160,48 +160,52 @@ export default function PhotoUpload() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-slate-50 rounded-2xl border border-slate-200 p-8"
+          className="bg-white rounded-2xl border border-slate-200 p-6 shadow-lg"
         >
-          <div className="flex items-center justify-between mb-6">
-            <h3 className="text-xl font-light text-slate-800">Current Image</h3>
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="text-lg font-medium text-slate-800">Current Image</h3>
             <button
               onClick={clearCurrentImage}
-              className="text-slate-400 hover:text-slate-600 transition-all duration-200 p-2 rounded-lg hover:bg-slate-100"
+              className="text-slate-400 hover:text-slate-600 transition-all duration-200 p-1.5 rounded-lg hover:bg-slate-100"
             >
-              <X className="w-5 h-5" />
+              <X className="w-4 h-4" />
             </button>
           </div>
           
-          <div className="flex items-center space-x-8">
-            <div className="relative w-40 h-40">
+          <div className="flex items-start space-x-4">
+            <div className="relative w-24 h-24 flex-shrink-0">
               <Image
                 src={currentImage}
                 alt={currentImageName}
                 fill
-                className="object-cover rounded-2xl border border-slate-200 shadow-lg"
+                className="object-cover rounded-xl border border-slate-200"
               />
               {isProcessing && (
-                <div className="absolute inset-0 bg-black bg-opacity-50 rounded-2xl flex items-center justify-center">
-                  <div className="w-10 h-10 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                <div className="absolute inset-0 bg-black bg-opacity-50 rounded-xl flex items-center justify-center">
+                  <div className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin" />
                 </div>
               )}
             </div>
             
-            <div className="flex-1">
-              <h4 className="font-light text-slate-800 text-lg mb-3">{currentImageName}</h4>
-              <div className="space-y-3">
-                <button
-                  onClick={handleReplaceImage}
-                  disabled={isProcessing}
-                  className="flex items-center space-x-3 px-6 py-3 bg-slate-700 text-white rounded-xl hover:bg-slate-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 font-light shadow-lg"
-                >
-                  <RefreshCw className="w-5 h-5" />
-                  <span>Replace Image</span>
-                </button>
-                <p className="text-sm text-slate-500 font-light">
-                  Click to select a different image
-                </p>
+            <div className="flex-1 min-w-0">
+              <div className="mb-3">
+                <p className="text-sm text-slate-500 mb-1">Generated</p>
+                <p className="text-sm text-slate-500 mb-1">Image</p>
+                <p className="text-sm text-slate-500">September 17, 2025 - 3:20PM</p>
               </div>
+              
+              <button
+                onClick={handleReplaceImage}
+                disabled={isProcessing}
+                className="flex items-center space-x-2 px-4 py-2 bg-slate-700 text-white rounded-lg hover:bg-slate-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 text-sm font-medium"
+              >
+                <RefreshCw className="w-4 h-4" />
+                <span>Replace Image</span>
+              </button>
+              
+              <p className="text-xs text-slate-500 mt-2">
+                Click to select a different image
+              </p>
             </div>
           </div>
         </motion.div>
