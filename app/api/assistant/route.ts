@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 const PROVIDER = process.env.AI_PROVIDER || "ollama";
 const OLLAMA_URL = process.env.OLLAMA_URL!;
 const OLLAMA_KEY = process.env.OLLAMA_PROXY_KEY!;
-const MODEL = process.env.LLM_MODEL || "phi3:instruct";
+const MODEL = process.env.LLM_MODEL || "qwen2:1.5b-instruct";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";

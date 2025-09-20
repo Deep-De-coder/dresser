@@ -15,8 +15,8 @@ interface WardrobeGridProps {
 const mockItems: WardrobeItem[] = [
   {
     id: '1',
-    name: 'Blue Denim Jacket',
-    category: 'jacket',
+    name: 'Blue Denim Jeans',
+    category: 'pants',
     imageUrl: 'https://images.unsplash.com/photo-1576995853123-5a10305d93c0?w=400&h=400&fit=crop',
     color: 'Blue',
     season: ['Spring', 'Fall'],
@@ -42,10 +42,10 @@ const mockItems: WardrobeItem[] = [
   },
   {
     id: '4',
-    name: 'Red Summer Dress',
+    name: 'White Summer Dress',
     category: 'dress',
     imageUrl: 'https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?w=400&h=400&fit=crop',
-    color: 'Red',
+    color: 'White',
     season: ['Spring', 'Summer'],
     favorite: false
   },
@@ -153,14 +153,14 @@ export default function WardrobeGrid({ category }: WardrobeGridProps) {
             </h3>
             
             <div className="space-y-3">
-              <div className="flex items-center justify-between text-sm">
+              <div className="text-sm">
                 <span className="text-slate-600 font-light">Color:</span>
-                <span className="font-light text-slate-800">{item.color}</span>
+                <span className="font-light text-slate-800 ml-2">{item.color}</span>
               </div>
               
-              <div className="flex items-center justify-between text-sm">
+              <div className="text-sm">
                 <span className="text-slate-600 font-light">Season:</span>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 mt-1">
                   {item.season.map((season, idx) => (
                     <span
                       key={idx}
