@@ -86,31 +86,34 @@ export default function AskDresser({ userId }: AskDresserProps) {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* Chat Input */}
-        <form onSubmit={handleSubmit} className="flex gap-4">
+        <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 sm:gap-4">
           <div className="flex-1 relative">
             <input
               type="text"
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
               placeholder="Ask Dresser: &quot;What should I wear for a business meeting tomorrow?&quot;"
-              className="w-full px-6 py-4 pr-14 border border-slate-300 rounded-2xl focus:ring-2 focus:ring-slate-500 focus:border-transparent text-slate-900 placeholder-slate-500 font-light text-lg shadow-lg"
+              className="w-full px-4 sm:px-6 py-3 sm:py-4 pr-12 sm:pr-14 border border-slate-300 rounded-2xl focus:ring-2 focus:ring-slate-500 focus:border-transparent text-slate-900 placeholder-slate-500 font-light text-base sm:text-lg shadow-lg"
               disabled={isLoading}
             />
-            <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
-              <Sparkles className="w-6 h-6 text-slate-400" />
+            <div className="absolute right-3 sm:right-4 top-1/2 transform -translate-y-1/2">
+              <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 text-slate-400" />
             </div>
           </div>
         <button
           type="submit"
           disabled={!prompt.trim() || isLoading}
-          className="px-8 py-4 bg-slate-700 text-white rounded-2xl hover:bg-slate-800 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-3 font-light text-lg shadow-lg transition-all duration-200"
+          className="px-6 sm:px-8 py-3 sm:py-4 bg-slate-700 text-white rounded-2xl hover:bg-slate-800 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 sm:gap-3 font-light text-base sm:text-lg shadow-lg transition-all duration-200"
         >
           {isLoading ? (
-            <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+            <div className="w-4 h-4 sm:w-5 sm:h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
           ) : (
-            <Send className="w-5 h-5" />
+            <>
+              <Send className="w-4 h-4 sm:w-5 sm:h-5" />
+              <span className="sm:hidden">Send</span>
+            </>
           )}
         </button>
       </form>
@@ -158,50 +161,50 @@ export default function AskDresser({ userId }: AskDresserProps) {
             className="space-y-4"
           >
             {/* Reply Text */}
-            <div className="bg-white rounded-xl border border-slate-200 p-6">
+            <div className="bg-white rounded-xl border border-slate-200 p-4 sm:p-6">
               <div className="flex items-start space-x-3">
-                <div className="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center">
-                  <Sparkles className="w-4 h-4 text-slate-600" />
+                <div className="w-6 h-6 sm:w-8 sm:h-8 bg-slate-100 rounded-full flex items-center justify-center flex-shrink-0">
+                  <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 text-slate-600" />
                 </div>
-                <div className="flex-1">
-                  <p className="text-slate-800 leading-relaxed">{response.reply}</p>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm sm:text-base text-slate-800 leading-relaxed">{response.reply}</p>
                 </div>
               </div>
             </div>
 
             {/* Outfit Plan */}
             {response.plan && (
-              <div className="bg-white rounded-xl border border-slate-200 p-6">
-                <h3 className="text-lg font-light text-slate-800 mb-4">Outfit Plan</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="bg-white rounded-xl border border-slate-200 p-4 sm:p-6">
+                <h3 className="text-base sm:text-lg font-light text-slate-800 mb-3 sm:mb-4">Outfit Plan</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                   {response.plan.top && (
-                    <div className="flex items-center space-x-3">
-                      <div className="w-2 h-2 bg-slate-400 rounded-full"></div>
-                      <span className="text-slate-700"><strong>Top:</strong> {response.plan.top}</span>
+                    <div className="flex items-center space-x-2 sm:space-x-3">
+                      <div className="w-2 h-2 bg-slate-400 rounded-full flex-shrink-0"></div>
+                      <span className="text-xs sm:text-sm text-slate-700"><strong>Top:</strong> {response.plan.top}</span>
                     </div>
                   )}
                   {response.plan.bottom && (
-                    <div className="flex items-center space-x-3">
-                      <div className="w-2 h-2 bg-slate-400 rounded-full"></div>
-                      <span className="text-slate-700"><strong>Bottom:</strong> {response.plan.bottom}</span>
+                    <div className="flex items-center space-x-2 sm:space-x-3">
+                      <div className="w-2 h-2 bg-slate-400 rounded-full flex-shrink-0"></div>
+                      <span className="text-xs sm:text-sm text-slate-700"><strong>Bottom:</strong> {response.plan.bottom}</span>
                     </div>
                   )}
                   {response.plan.shoes && (
-                    <div className="flex items-center space-x-3">
-                      <div className="w-2 h-2 bg-slate-400 rounded-full"></div>
-                      <span className="text-slate-700"><strong>Shoes:</strong> {response.plan.shoes}</span>
+                    <div className="flex items-center space-x-2 sm:space-x-3">
+                      <div className="w-2 h-2 bg-slate-400 rounded-full flex-shrink-0"></div>
+                      <span className="text-xs sm:text-sm text-slate-700"><strong>Shoes:</strong> {response.plan.shoes}</span>
                     </div>
                   )}
                   {response.plan.outerwear && (
-                    <div className="flex items-center space-x-3">
-                      <div className="w-2 h-2 bg-slate-400 rounded-full"></div>
-                      <span className="text-slate-700"><strong>Outerwear:</strong> {response.plan.outerwear}</span>
+                    <div className="flex items-center space-x-2 sm:space-x-3">
+                      <div className="w-2 h-2 bg-slate-400 rounded-full flex-shrink-0"></div>
+                      <span className="text-xs sm:text-sm text-slate-700"><strong>Outerwear:</strong> {response.plan.outerwear}</span>
                     </div>
                   )}
                   {response.plan.accessories && response.plan.accessories.length > 0 && (
-                    <div className="flex items-center space-x-3">
-                      <div className="w-2 h-2 bg-slate-400 rounded-full"></div>
-                      <span className="text-slate-700"><strong>Accessories:</strong> {response.plan.accessories.join(', ')}</span>
+                    <div className="flex items-center space-x-2 sm:space-x-3">
+                      <div className="w-2 h-2 bg-slate-400 rounded-full flex-shrink-0"></div>
+                      <span className="text-xs sm:text-sm text-slate-700"><strong>Accessories:</strong> {response.plan.accessories.join(', ')}</span>
                     </div>
                   )}
                 </div>
@@ -222,26 +225,27 @@ export default function AskDresser({ userId }: AskDresserProps) {
             )}
 
             {/* Feedback */}
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0">
               <div className="text-xs text-slate-500">
                 {response.meta ? (
-                  <>Powered by {response.meta.provider} ({response.meta.model}) • {response.meta.latencyMs}ms</>
+                  <span className="hidden sm:inline">Powered by {response.meta.provider} ({response.meta.model}) • {response.meta.latencyMs}ms</span>
                 ) : (
-                  <>Powered by AI Assistant</>
+                  <span className="hidden sm:inline">Powered by AI Assistant</span>
                 )}
+                <span className="sm:hidden">AI Response</span>
               </div>
               <div className="flex items-center space-x-2">
                 <button
                   onClick={() => handleFeedback('accepted')}
                   className="p-2 rounded-lg bg-slate-100 text-slate-600 hover:bg-green-100 hover:text-green-600 transition-colors"
                 >
-                  <ThumbsUp className="w-5 h-5" />
+                  <ThumbsUp className="w-4 h-4 sm:w-5 sm:h-5" />
                 </button>
                 <button
                   onClick={() => handleFeedback('rejected')}
                   className="p-2 rounded-lg bg-slate-100 text-slate-600 hover:bg-red-100 hover:text-red-600 transition-colors"
                 >
-                  <ThumbsDown className="w-5 h-5" />
+                  <ThumbsDown className="w-4 h-4 sm:w-5 sm:h-5" />
                 </button>
               </div>
             </div>
