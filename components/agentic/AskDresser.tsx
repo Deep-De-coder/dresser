@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Send, Sparkles, ThumbsUp, ThumbsDown, MessageSquare } from 'lucide-react'
 
 interface AssistantResponse {
-  replyText: string
+  reply: string
   plan: {
     top?: string
     bottom?: string
@@ -164,7 +164,7 @@ export default function AskDresser({ userId }: AskDresserProps) {
                   <Sparkles className="w-4 h-4 text-slate-600" />
                 </div>
                 <div className="flex-1">
-                  <p className="text-slate-800 leading-relaxed">{response.replyText}</p>
+                  <p className="text-slate-800 leading-relaxed">{response.reply}</p>
                 </div>
               </div>
             </div>
