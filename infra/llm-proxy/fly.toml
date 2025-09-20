@@ -1,11 +1,15 @@
+# fly.toml app configuration file generated for dresser-llm-proxy
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
 app = "dresser-llm-proxy"
 primary_region = "iad"
 
 [build]
 
 [env]
-  PORT = "8787"
-  HOST = "0.0.0.0"
+  NODE_ENV = "production"
 
 [http_service]
   internal_port = 8787
@@ -19,6 +23,3 @@ primary_region = "iad"
   cpu_kind = "shared"
   cpus = 1
   memory_mb = 256
-
-[deploy]
-  release_command = "echo 'LLM Proxy deployed successfully'"
